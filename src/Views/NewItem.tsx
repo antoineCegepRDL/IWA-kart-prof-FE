@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../styles/todoItem.scss'
 import { POST } from '../composables/server';
 import Brand from '../types/Brand';
 

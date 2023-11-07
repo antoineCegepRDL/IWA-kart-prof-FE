@@ -1,52 +1,39 @@
-import React, { useState } from 'react';
-import '../styles/todoItem.scss'
-import { POST } from '../composables/server';
-import Brand from '../types/Brand';
+import '../styles/home.scss'
+import mainImage from'../images/mainImage.png'
+import { useEffect, useState } from 'react'
+import { GET } from '../composables/server'
+import ProductComponent from '../Components/User/Product'
+import Product from '../types/Product'
 
 export default function SendMessage() {
-  const [formData, setFormData] = useState({
-    name: '',
-    logoUrl: ''
-  })
+  const [products, setProducts] = useState<Product[]>([])
 
-  const handleChange = (e: any) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e: any) => {
-    try {
-      e.preventDefault()
-      const response = await POST<Brand>('brand', formData as Brand)
-      if(response)
-      {
-        setFormData({
-          name: '',
-          logoUrl: ''
-        })
-      }
+  useEffect(() => {
+    const getProducts = async () => {
+      const productsFromServer = await GET<Product>('items')
+      setProducts(productsFromServer)
     }
-    catch (error) {
-      alert("error")
-    }
-  }
-
-
+    getProducts()
+  }, [])
+  
   return (
-    <form onSubmit={handleSubmit}>
-        <label htmlFor="name">
-          Nom du produit
-          <input type='text' name="name" value={formData.name} onChange={handleChange} />
-        </label>
-
-        <label htmlFor="name">
-          Url de l'image du produit
-          <input type='text' name="logoUrl" value={formData.logoUrl} onChange={handleChange}/>
-        </label>
-
-        <input type='submit' className='button' value='Submit' />
-    </form>
+    <>
+    <div className='wrapper'>
+      <div className='homeImage'>
+        <img src={mainImage} alt="" />
+        <p className='welcomeMessage'>
+        50% de rabais sur + de 500 produits
+        </p>
+      </div>
+      <div className='products'>
+        <p className="text">En rabais</p>
+        <div className='list'>
+          {products.map(product => 
+            <ProductComponent product={product}></ProductComponent>
+          )}
+        </div>
+      </div>
+    </div>
+    </>
   )
 }

@@ -1,0 +1,27 @@
+.wrapper {
+  .homeImage {
+    position: relative;
+    .welcomeMessage {
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: #FFF;
+      font-family: DM Sans;
+      font-size: 96px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 100%; /* 96px */
+    }
+  }
+  .products {
+    .text {
+      font-size: 64px;
+      color: #000;
+      font-family: DM Sans;
+      font-size: 64px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+  }
+}
