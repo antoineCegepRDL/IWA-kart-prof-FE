@@ -10,4 +10,5 @@ export default interface Item {
   name: string;
   description: string;
   brand: Brand;
+  brandId: string;
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { POST } from '../composables/server';
-import Brand from '../types/Brand';
+import { POST } from '../../composables/server';
+import Brand from '../../types/Brand';
 
 export default function SendMessage() {
   const [formData, setFormData] = useState({

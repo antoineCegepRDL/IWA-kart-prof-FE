@@ -1,9 +1,9 @@
-import '../styles/home.scss'
-import mainImage from'../images/mainImage.png'
+import '../../styles/home.scss'
+import mainImage from'../../images/mainImage.png'
 import { useEffect, useState } from 'react'
-import { GET } from '../composables/server'
-import ProductComponent from '../Components/User/Product'
-import Product from '../types/Product'
+import { GET } from '../../composables/server'
+import ProductComponent from '../../Components/User/Product'
+import Product from '../../types/Product'
 
 export default function SendMessage() {
   const [products, setProducts] = useState<Product[]>([])

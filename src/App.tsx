@@ -1,10 +1,12 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom"
-import NewBrand from "./Views/NewBrand"
-import NewItem from "./Views/NewItem"
+import NewBrand from "./Views/Admin/NewBrand"
+import Products from "./Views/Admin/Products"
 import UserLayout from "./Components/User/Layout"
 import AdminLayout from "./Components/Admin/Layout"
-import Home from "./Views/Home"
+import Home from "./Views/User/Home"
 import './styles/global.scss'
+import Kart from "./Views/User/Kart"
+import Product from "./Views/Admin/Product"
 
 export default function App() {
   return (
@@ -13,10 +15,12 @@ export default function App() {
         <Routes>
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="brand" element={<NewBrand />}></Route>
-          <Route path="item" element={<NewItem />}></Route>
+          <Route path="products" element={<Products />}></Route>
+          <Route path="product/:id" element={<Products />}></Route>
+          <Route path="product" element={<Product />}></Route>
         </Route>
         <Route path="/" element={<UserLayout />}>
-          <Route path="kart" element={<NewBrand />}></Route>
+          <Route path="kart" element={<Kart />}></Route>
           <Route index element={<Home />}></Route>
         </Route>
         </Routes>

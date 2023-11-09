@@ -9,10 +9,10 @@ export default function AdminLayout() {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/admin/brand">Brand</Link>
+            <Link to="/admin/brand">Maques</Link>
           </li>
           <li>
-            <Link to="/admin/item">Item</Link>
+            <Link to="/admin/products">Produits</Link>
           </li>
         </ul>
       </nav>
