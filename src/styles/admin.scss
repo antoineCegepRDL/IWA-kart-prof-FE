@@ -1,0 +1,50 @@
+.product-wrapper {
+  margin: 0 100px;
+  h1 {
+    font-size: 64px;
+    color: #000;
+    font-family: DM Sans;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  label {
+    display: block;
+    margin: 15px 0;
+    font-size: 22px;
+    input, textarea, select {
+      display: block;
+      width: 80%;
+      height: 30px;
+      font-size: 100%;
+    }
+    textarea {
+      height: 100px;
+    }
+  }
+}
+
+.products-wrapper {
+  margin: 0 100px;
+  h1 {
+    font-size: 64px;
+    color: #000;
+    font-family: DM Sans;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  .products-list {
+    img {
+      width: 100px;
+      height: 100px;
+    }
+    .supprimer {
+      cursor: pointer;
+    }
+  }
+}

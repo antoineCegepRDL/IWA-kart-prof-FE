@@ -39,8 +39,12 @@ export default function SendMessage() {
     try {
       e.preventDefault()
       const product = formData
+      product.price = +product.price
+      product.discountPercentage = +product.discountPercentage
+      product.quantity = +product.quantity
+      
       if (brands.find(x => x.id === formData.brandId)) {
-        const response = await POST<Product>('item', formData)
+        const response = await POST<Product>('item', product)
         if (response) {
           navigate('/admin/products')
         }
@@ -55,49 +59,52 @@ export default function SendMessage() {
 
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="name">
-        Nom du produit
-        <input name="name" value={formData.name} onChange={handleChange} />
-      </label>
+    <div className='product-wrapper'>
+      <h1>Nouveau produit</h1>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="name">
+          Nom du produit
+          <input name="name" value={formData.name} onChange={handleChange} />
+        </label>
 
-      <label htmlFor="description">
-        Description du procuit
-        <input name="description" value={formData.description} onChange={handleChange} />
-      </label>
+        <label htmlFor="description">
+          Description du procuit
+          <textarea name="description" value={formData.description} onChange={handleChange} />
+        </label>
 
-      <label htmlFor="price">
-        Prix
-        <input type='number' name="price" value={formData.price} onChange={handleChange} />
-      </label>
+        <label htmlFor="price">
+          Prix
+          <input type='number' name="price" value={formData.price} onChange={handleChange} />
+        </label>
 
-      <label htmlFor="quantity">
-        Quantité en inventaire
-        <input type='number' name="quantity" value={formData.quantity} onChange={handleChange} />
-      </label>
+        <label htmlFor="quantity">
+          Quantité en inventaire
+          <input type='number' name="quantity" value={formData.quantity} onChange={handleChange} />
+        </label>
 
-      <label htmlFor="discountPercentage">
-        Pourcentage de rabais
-        <input type='number' name="discountPercentage" value={formData.discountPercentage} onChange={handleChange} />
-      </label>
+        <label htmlFor="discountPercentage">
+          Pourcentage de rabais
+          <input type='number' name="discountPercentage" value={formData.discountPercentage} onChange={handleChange} />
+        </label>
 
-      <label htmlFor="imageUrl">
-        Url de l'image du produit
-        <input name="imageUrl" value={formData.imageUrl} onChange={handleChange} />
-      </label>
+        <label htmlFor="imageUrl">
+          Url de l'image du produit
+          <input name="imageUrl" value={formData.imageUrl} onChange={handleChange} />
+        </label>
 
-      <label htmlFor="brandId">
-        <select name="brandId" id="brandId" onChange={handleChange}>
-          <option value="">Choisir une valeur</option>
-          {brands.map(brand =>
-            <option value={brand.id}>
-              {brand.name}
-            </option>
-          )}
-        </select>
-      </label>
-      
-      <input type='submit' className='button' value='Créer' />
-    </form>
+        <label htmlFor="brandId">
+          <select name="brandId" id="brandId" onChange={handleChange}>
+            <option value="">Choisir une valeur</option>
+            {brands.map(brand =>
+              <option value={brand.id}>
+                {brand.name}
+              </option>
+            )}
+          </select>
+        </label>
+
+        <input type='submit' className='button' value='Créer' />
+      </form>
+    </div>
   )
 }
