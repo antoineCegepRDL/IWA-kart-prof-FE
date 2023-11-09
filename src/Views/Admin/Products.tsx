@@ -10,8 +10,8 @@ export default function SendMessage() {
 
   useEffect(() => {
     const getProducts = async () => {
-      const productsFromServer = await GET<Product>('items')
-      const brands = await GET<Brand>('brands')
+      const productsFromServer = await GET<Product[]>('items')
+      const brands = await GET<Brand[]>('brands')
       productsFromServer.forEach(x => {
         const brand = brands.find(y => y.id === x.brandId)
         if (brand) {

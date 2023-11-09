@@ -10,7 +10,7 @@ export default function AdminLayout() {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/admin/brand">Maques</Link>
+            <Link to="/admin/brands">Maques</Link>
           </li>
           <li>
             <Link to="/admin/products">Produits</Link>

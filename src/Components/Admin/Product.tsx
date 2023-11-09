@@ -15,9 +15,9 @@ export default function ProductComponent({product, onDeleteItem}: {product: Prod
       <td>
         <img src={product.imageUrl} alt="" />
       </td>
-      <td>{product.brand.name}</td>
+      <td>{product.brand?.name}</td>
       <td>
-        <img src={product.brand.logoUrl} alt="" />
+        <img src={product.brand?.logoUrl} alt="" />
       </td>
       <td>
         <p className='supprimer' onClick={handleDeleteItem}>Supprimer</p>

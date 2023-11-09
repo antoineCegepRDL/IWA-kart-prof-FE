@@ -1,6 +1,7 @@
 .wrapper {
   .homeImage {
     position: relative;
+
     .welcomeMessage {
       position: absolute;
       top: 0;
@@ -10,18 +11,87 @@
       font-size: 96px;
       font-style: normal;
       font-weight: 700;
-      line-height: 100%; /* 96px */
+      line-height: 100%;
+      /* 96px */
     }
   }
+
   .products {
-    .text {
-      font-size: 64px;
-      color: #000;
-      font-family: DM Sans;
-      font-size: 64px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
+
+    .product-home {
+      margin: 10px;
+      width: 500x;
+      height: 800px;
     }
+
+    .product {
+      .product-name {
+        margin: 0;
+        color: #000;
+        font-family: DM Serif Display;
+        font-size: 48px;
+        font-style: italic;
+        font-weight: 400;
+      }
+
+      .brand-name {
+        margin: 0;
+        color: #000;
+        font-family: DM Sans;
+        font-size: 36px;
+        font-weight: 700;
+      }
+
+      .price {
+        display: flex;
+
+        p {
+          text-align: center;
+          font-family: DM Sans;
+          font-size: 16px;
+          font-weight: 400;
+          border-radius: 5px;
+          background: #FFF;
+          display: flex;
+          width: 76px;
+          height: 33px;
+          flex-direction: column;
+          justify-content: center;
+          border: 1px solid #000;
+          margin-right: 20px;
+        }
+
+        .old-price {
+          color: rgba(0, 0, 0, 0.25);
+          text-decoration-line: line-through;
+        }
+
+        .regular-price {
+          color: #000;
+        }
+      }
+    }
+  }
+}
+
+.list {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.section-title {
+  font-size: 64px;
+  color: #000;
+  font-family: DM Sans;
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.brand {
+  
+  img {
+    border-radius: 50%;
   }
 }

@@ -1,6 +1,6 @@
 // Function to fetch data from the API
 const baseUrl = 'https://kart-api-a791f9ba7744.herokuapp.com/'
-export async function GET<T>(url: string): Promise<T[]> {
+export async function GET<T>(url: string): Promise<T> {
   try {
     const response = await fetch(`${baseUrl}${url}`);
     if (!response.ok) {

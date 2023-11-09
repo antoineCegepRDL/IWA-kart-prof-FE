@@ -10,7 +10,7 @@ export default function SendMessage() {
   const [brands, setBrands] = useState<Brand[]>([])
   useEffect(() => {
     const getBrands = async () => {
-      const response = await GET<Brand>('brands')
+      const response = await GET<Brand[]>('brands')
       setBrands(response)
     }
     getBrands()

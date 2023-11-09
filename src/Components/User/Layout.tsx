@@ -20,6 +20,7 @@ export default function AdminLayout() {
         <div className="side">
           <div>
             <Link to="/kart">Panier</Link>
+            <Link to="/admin/products">Administration</Link>
           </div>
         </div>
       </div>
