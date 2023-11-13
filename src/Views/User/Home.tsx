@@ -51,7 +51,7 @@ export default function SendMessage() {
           <h2 className="section-title">En rabais</h2>
           <div className='list'>
             {productsInDiscount.map(product =>
-              <div className='product-home'>
+              <div className='discount-product-home'>
                 <ProductComponent product={product} key={product.id}></ProductComponent>
               </div>
             )}
@@ -62,7 +62,7 @@ export default function SendMessage() {
           <h2 className="section-title">Nos nouveautés</h2>
           <div className='list'>
             {products.map(product =>
-              <div className='product-home'>
+              <div className='new-product-home'>
                 <ProductComponent product={product} key={product.id}></ProductComponent>
               </div>
             )}

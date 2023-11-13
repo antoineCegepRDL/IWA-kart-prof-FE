@@ -4,7 +4,7 @@ export default function ProductComponent({ product }: { product: Product }) {
   return (
     <div className='product'>
       <div className="imageContainer">
-        <img src={product.imageUrl} width='500' height='500' alt="" />
+        <img src={product.imageUrl} alt="" />
       </div>
       <hr />
       <p className='product-name'>{product.name}</p>

@@ -18,13 +18,23 @@
 
   .products {
 
-    .product-home {
+    .discount-product-home {
       margin: 10px;
       width: 500x;
-      height: 800px;
+      height: 500px;
+    }
+
+    .new-product-home {
+      margin: 10px;
+      width: 400x;
+      height: 400px;
     }
 
     .product {
+      img {
+        max-width: 90%;
+        max-width: 90%;
+      }
       .product-name {
         margin: 0;
         color: #000;
