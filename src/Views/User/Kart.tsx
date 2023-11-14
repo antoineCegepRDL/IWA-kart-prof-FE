@@ -1,51 +1,68 @@
-import React, { useState } from 'react';
-import { POST } from '../../composables/server';
-import Brand from '../../types/Brand';
+import '../../styles/home.scss'
+import { useEffect, useState } from 'react'
+import { POST } from '../../composables/server'
+import KartProductComponent from '../../Components/User/KartProduct'
+import Product from '../../types/Product'
+import { clearStorage, getProductsFromStorage, removeProduct } from '../../composables/localStorage'
 
 export default function SendMessage() {
-  const [formData, setFormData] = useState({
-    name: '',
-    logoUrl: ''
-  })
+  const [products, setProducts] = useState<Product[]>([])
+  const [total, setTotal] = useState(0)
 
-  const handleChange = (e: any) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  useEffect(() => {
+    const getProducts = async () => {
+      const productsFromKart: Product[] = getProductsFromStorage()
+      setProducts(productsFromKart)
+      calculateNewTotal(productsFromKart)
+    }
+    getProducts()
+  }, [])
 
-  const handleSubmit = async (e: any) => {
-    try {
-      e.preventDefault()
-      const response = await POST<Brand>('brand', formData as Brand)
-      if(response)
-      {
-        setFormData({
-          name: '',
-          logoUrl: ''
-        })
-      }
-    }
-    catch (error) {
-      alert("error")
-    }
+  const calculateNewTotal = (products: Product[]) => {
+    const total = products.reduce((acc, x) => acc + x.quantityToBuy * (x.discountPercentage > 0 ? x.discountPercentage * x.price : x.price)
+    , 0)
+    setTotal(total)
   }
 
+  const onChangeQuatity = (product: Product) => {
+    products.find(x => x.id === product.id)!.quantityToBuy = product.quantityToBuy
+    setProducts([...products])
+    calculateNewTotal(products)
+  }
+  
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault()
+    const command = products.map(x => ({quantity : x.quantityToBuy, id: x.id}))
+    POST('command', command)
+    clearStorage()
+  }
 
+  const onRemoveProduct = async (id: string) => {
+    const filteredProducts = [...products].filter(x => x.id !== id)
+    setProducts(filteredProducts)
+    removeProduct(id)
+    calculateNewTotal(filteredProducts)
+  }
   return (
-    <form onSubmit={handleSubmit}>
-        <label htmlFor="name">
-          Nom du produit
-          <input type='text' name="name" value={formData.name} onChange={handleChange} />
-        </label>
-
-        <label htmlFor="name">
-          Url de l'image du produit
-          <input type='text' name="logoUrl" value={formData.logoUrl} onChange={handleChange}/>
-        </label>
-
-        <input type='submit' className='button' value='Submit' />
-    </form>
+    <>
+      <div className='wrapper'>
+        <div className='products'>
+          <h2 className="section-title">Mon panier</h2>
+          <div className='list'>
+            {products.map(product =>
+              <div className='new-product-home'>
+                <KartProductComponent product={product} onChangeQuatity={onChangeQuatity} onRemoveProduct={onRemoveProduct} key={product.id}></KartProductComponent>
+              </div>
+            )}
+          </div>
+        </div>
+        <div className='total'>
+              <p>Total : {total}</p>
+        </div>
+        <form onSubmit={handleSubmit}>
+          <input type="submit" value="Passer la commande" />
+        </form>
+      </div>
+    </>
   )
 }

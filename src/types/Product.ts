@@ -7,6 +7,7 @@ export default interface Item {
   discountPercentage: number;
   imageUrl: string;
   quantity: number;
+  quantityToBuy: number;
   name: string;
   description: string;
   brand: Brand;

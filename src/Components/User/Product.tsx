@@ -1,8 +1,10 @@
+import { useNavigate } from 'react-router-dom'
 import Product from '../../types/Product'
 
 export default function ProductComponent({ product }: { product: Product }) {
+  const navigate = useNavigate()
   return (
-    <div className='product'>
+    <div className='product' onClick={() => navigate(`/product/${product.id}`)}>
       <div className="imageContainer">
         <img src={product.imageUrl} alt="" />
       </div>

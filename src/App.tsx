@@ -4,6 +4,7 @@ import Products from "./Views/Admin/Products"
 import UserLayout from "./Components/User/Layout"
 import AdminLayout from "./Components/Admin/Layout"
 import Home from "./Views/User/Home"
+import UserProduct from "./Views/User/Product"
 import './styles/global.scss'
 import Kart from "./Views/User/Kart"
 import Product from "./Views/Admin/Product"
@@ -23,6 +24,7 @@ export default function App() {
         </Route>
         <Route path="/" element={<UserLayout />}>
           <Route path="kart" element={<Kart />}></Route>
+          <Route path="product/:id" element={<UserProduct />}></Route>
           <Route index element={<Home />}></Route>
         </Route>
         </Routes>
