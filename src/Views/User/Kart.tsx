@@ -1,9 +1,8 @@
-import '../../styles/home.scss'
 import { useEffect, useState } from 'react'
 import { POST } from '../../composables/server'
 import KartProductComponent from '../../Components/User/KartProduct'
 import Product from '../../types/Product'
-import { clearStorage, getProductsFromStorage, removeProduct } from '../../composables/localStorage'
+import { clearStorage, getProductsFromStorage, removeProductFromStorage, setProductFromStorage } from '../../composables/localStorage'
 
 export default function SendMessage() {
   const [products, setProducts] = useState<Product[]>([])
@@ -20,19 +19,20 @@ export default function SendMessage() {
 
   const calculateNewTotal = (products: Product[]) => {
     const total = products.reduce((acc, x) => acc + x.quantityToBuy * (x.discountPercentage > 0 ? x.discountPercentage * x.price : x.price)
-    , 0)
+      , 0)
     setTotal(total)
   }
 
   const onChangeQuatity = (product: Product) => {
+    setProductFromStorage(product)
     products.find(x => x.id === product.id)!.quantityToBuy = product.quantityToBuy
     setProducts([...products])
     calculateNewTotal(products)
   }
-  
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
-    const command = products.map(x => ({quantity : x.quantityToBuy, id: x.id}))
+    const command = products.map(x => ({ quantity: x.quantityToBuy, id: x.id }))
     POST('command', command)
     clearStorage()
   }
@@ -40,7 +40,7 @@ export default function SendMessage() {
   const onRemoveProduct = async (id: string) => {
     const filteredProducts = [...products].filter(x => x.id !== id)
     setProducts(filteredProducts)
-    removeProduct(id)
+    removeProductFromStorage(id)
     calculateNewTotal(filteredProducts)
   }
   return (
@@ -57,11 +57,14 @@ export default function SendMessage() {
           </div>
         </div>
         <div className='total'>
-              <p>Total : {total}</p>
+          <p>Total : {total}$</p>
+          <p>TPS : {total * 0.05}$</p>
+          <p>TVP : {total * 0.10}$</p>
+          <p>Total : {total * 1.15}$</p>
         </div>
-        <form onSubmit={handleSubmit}>
-          <input type="submit" value="Passer la commande" />
-        </form>
+        <div className='button' onClick={handleSubmit}>
+          <p>Passer la commande</p>
+        </div>
       </div>
     </>
   )

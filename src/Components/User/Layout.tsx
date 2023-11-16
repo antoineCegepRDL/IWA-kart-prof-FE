@@ -24,7 +24,9 @@ export default function AdminLayout() {
           </div>
         </div>
       </div>
-      <Outlet />
+      <div className='wrapper'>
+        <Outlet />
+      </div>
       <div>
         FOOTER
       </div>

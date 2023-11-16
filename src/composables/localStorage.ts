@@ -5,12 +5,21 @@ export function getProductsFromStorage(): Product[] {
   return JSON.parse(localStorage.getItem(key) ?? '[]') as Product[]
 }
 
-export function removeProduct(id: string) {
+export function removeProductFromStorage(id: string) {
   const products = getProductsFromStorage()
-  localStorage.setItem('kartProducts', JSON.stringify(products.filter(x => x.id !== id)))
+  localStorage.setItem(key, JSON.stringify(products.filter(x => x.id !== id)))
 }
 
-export function addProduct(product: Product) {
+export function setProductFromStorage(product: Product) {
+  const products = getProductsFromStorage()
+  const productToUpdate = products.find(x => x.id === product.id)
+  if (productToUpdate) {
+    productToUpdate.quantityToBuy = product.quantityToBuy
+  }
+  localStorage.setItem(key, JSON.stringify(products))
+}
+
+export function addProductFromStorage(product: Product) {
   let products = getProductsFromStorage()
   products = products.filter(x => x.id !== product.id)
   product.quantityToBuy = 1
