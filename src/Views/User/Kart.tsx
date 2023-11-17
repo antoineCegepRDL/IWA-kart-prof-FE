@@ -56,15 +56,23 @@ export default function SendMessage() {
             )}
           </div>
         </div>
-        <div className='total'>
-          <p>Total : {total}$</p>
-          <p>TPS : {total * 0.05}$</p>
-          <p>TVP : {total * 0.10}$</p>
-          <p>Total : {total * 1.15}$</p>
-        </div>
-        <div className='button' onClick={handleSubmit}>
-          <p>Passer la commande</p>
-        </div>
+        {
+          products.length === 0 
+          ? <div>
+            Le panier est vide!
+          </div>
+          : <>
+            <div className='total'>
+              <p>Total : {total}$</p>
+              <p>TPS : {total * 0.05}$</p>
+              <p>TVP : {total * 0.10}$</p>
+              <p>Total : {total * 1.15}$</p>
+            </div>
+            <div className='button' onClick={handleSubmit}>
+              <p>Passer la commande</p>
+            </div>
+          </>
+        }
       </div>
     </>
   )

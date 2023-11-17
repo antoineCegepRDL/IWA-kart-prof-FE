@@ -1,10 +1,10 @@
 import { Outlet, Link } from 'react-router-dom'
 import '../../styles/layout.scss'
-
+import APropos from '../../assets/AProposBackground.png'
 export default function AdminLayout() {
   return (
     <>
-      <div id="header">
+      <header>
         <Link to="/" id="logo">
           <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 45 45" fill="none">
             <ellipse cx="22.48" cy="22.5263" rx="22.22" ry="21.7105" fill="black" />
@@ -23,13 +23,18 @@ export default function AdminLayout() {
             <Link to="/admin/products">Administration</Link>
           </div>
         </div>
-      </div>
+      </header>
       <div className='wrapper'>
         <Outlet />
       </div>
-      <div>
-        FOOTER
-      </div>
+      <footer>
+        <div id="a-propos">
+          <img src={APropos} alt="" />
+          <div className='text'>
+            <p>Nos produits sont aussi fiables que la CSS du site web!</p>
+          </div>
+        </div>
+      </footer>
     </>
   )
 }
