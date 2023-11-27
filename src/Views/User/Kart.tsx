@@ -33,8 +33,8 @@ export default function SendMessage() {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
-    const command = products.map(x => ({ quantity: x.quantityToBuy, id: x.id }))
-    POST('command', command)
+    const order = products.map(x => ({ quantity: x.quantityToBuy, id: x.id }))
+    POST('order', order)
     clearStorage()
   }
 
