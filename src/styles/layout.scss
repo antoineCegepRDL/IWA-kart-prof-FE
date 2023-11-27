@@ -49,8 +49,13 @@ header {
 }
 
 footer {
-
+  
   #a-propos {
+    img {
+      width: 100%;
+      height: 300px;
+    }
+
     position: relative;
 
     .text {

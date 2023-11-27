@@ -1,0 +1,50 @@
+.list {
+  height: auto;
+  .kart-product {
+    height: auto;
+    .product {
+      height: auto;
+    }
+  }
+  .kart-buttons {
+    display: flex;
+    .kart-button {
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      justify-content: center; /* Horizontally centers the content */
+    }
+    .quantity-to-buy {
+      font-size: 45px;
+      font-family: comic;
+      border: black 1px solid;
+      border-radius: 15px;
+      height: 50px;
+      min-width: 50px;
+      text-align: center;
+      justify-content: center; /* Horizontally centers the content */
+      align-items: center;
+    }
+  }
+  
+}
+span+.price,.total .price, .totalAmount p {
+  font-size: 45px;
+  font-family: comic;
+  border: black 1px solid;
+  border-radius: 15px;
+  height: 50px;
+  min-width: 50px;
+  text-align: center;
+  justify-content: center; /* Horizontally centers the content */
+  align-items: center;
+}
+
+.product {
+  height: 100%;
+}
+
+
+.center {
+  margin:auto;
+}

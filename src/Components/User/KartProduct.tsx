@@ -1,4 +1,7 @@
+import '../../styles/kart.scss'
 import Product from '../../types/Product'
+import DiscountPrice from './DiscountPrice'
+import RegularPrice from './RegularPrice'
 
 export default function KartProduct({ product, onChangeQuatity, onRemoveProduct }: { product: Product, onChangeQuatity: Function, onRemoveProduct: Function }) {
   const removeQuantity = () => {
@@ -30,30 +33,15 @@ export default function KartProduct({ product, onChangeQuatity, onRemoveProduct 
         ? <DiscountPrice product={product}></DiscountPrice>
         : <RegularPrice product={product}></RegularPrice>
       }
-      <div>
-        <span onClick={addQuantity}>+</span>
-          {product.quantityToBuy}
-        <span onClick={removeQuantity}>-</span>
-        <span onClick={() => onRemoveProduct(product.id) }>Retirer</span>
+      <div className='kart-buttons'>
+        <span className='kart-button button' onClick={addQuantity}>+</span>
+        <span className='quantity-to-buy'>{product.quantityToBuy}</span>
+        <span className='kart-button button' onClick={removeQuantity}>-</span>
+        <span className='kart-button button' onClick={() => onRemoveProduct(product.id) }>X</span>
       </div>
-      <p className="total">{total}</p>
-    </div>
-  )
-}
-
-const DiscountPrice = ({ product }: { product: Product }) => {
-  return (
-    <div className='price'>
-      <p className='old-price'>{product.price}</p>
-      <p className='regular-price'>{product.price * product.discountPercentage}</p>
-    </div>
-  )
-}
-
-const RegularPrice = ({ product }: { product: Product }) => {
-  return (
-    <div className='price'>
-      <p className='regular-price'>{product.price}</p>
+      <div className='totalAmount'>
+        <p className="price">{total.toFixed(2)}</p>
+      </div>
     </div>
   )
 }

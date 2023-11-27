@@ -15,6 +15,7 @@ export default function ProductPage() {
 
   useEffect(() => {
     const getProducts = async () => {
+      if(products.length > 0) return;
       const productsInDiscoutFromServer = await GET<Product[]>('items?itemsOnDiscount=true&limit=3&offset=0')
       const productsFromServer = await GET<Product[]>('items?limit=3&offset=0')
       const brands = await GET<Brand[]>('brands')
@@ -36,16 +37,17 @@ export default function ProductPage() {
       setProducts(productsFromServer)
     }
     const getProduct = async () => {
-      const product = await GET<Product>(`item/${id}`)
-      if (product) {
-        const brand = await GET<Brand>(`brand/${product.brandId}`)
-        product.brand = brand
-        setProduct(product)
+      if(product) return;
+      const productFromServer = await GET<Product>(`item/${id}`)
+      if (productFromServer) {
+        const brand = await GET<Brand>(`brand/${productFromServer.brandId}`)
+        productFromServer.brand = brand
+        setProduct(productFromServer)
       }
     }
     getProduct()
     getProducts()
-  }, [product])
+  }, [product, products, productsInDiscount])
 
   let { id } = useParams()
   const onAddToKartClick = () => {

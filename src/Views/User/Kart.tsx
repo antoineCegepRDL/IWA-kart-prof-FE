@@ -1,3 +1,4 @@
+import '../../styles/kart.scss'
 import { useEffect, useState } from 'react'
 import { POST } from '../../composables/server'
 import KartProductComponent from '../../Components/User/KartProduct'
@@ -43,6 +44,7 @@ export default function SendMessage() {
     removeProductFromStorage(id)
     calculateNewTotal(filteredProducts)
   }
+
   return (
     <>
       <div className='wrapper'>
@@ -50,7 +52,7 @@ export default function SendMessage() {
           <h2 className="section-title">Mon panier</h2>
           <div className='list'>
             {products.map(product =>
-              <div className='new-product-home'>
+              <div className='product-kart'>
                 <KartProductComponent product={product} onChangeQuatity={onChangeQuatity} onRemoveProduct={onRemoveProduct} key={product.id}></KartProductComponent>
               </div>
             )}
@@ -61,17 +63,17 @@ export default function SendMessage() {
           ? <div>
             Le panier est vide!
           </div>
-          : <>
+          : <div>
             <div className='total'>
-              <p>Total : {total}$</p>
-              <p>TPS : {total * 0.05}$</p>
-              <p>TVP : {total * 0.10}$</p>
-              <p>Total : {total * 1.15}$</p>
+              <p className='price'>Total : {total.toFixed(2)}$</p>
+              <p className='price'>TPS : {(total * 0.05).toFixed(2)}$</p>
+              <p className='price'>TVP : {(total * 0.10).toFixed(2)}$</p>
+              <p className='price total'>Total : {(total * 1.15).toFixed(2)}$</p>
             </div>
-            <div className='button' onClick={handleSubmit}>
+            <div className='button center' onClick={handleSubmit}>
               <p>Passer la commande</p>
             </div>
-          </>
+          </div>
         }
       </div>
     </>
