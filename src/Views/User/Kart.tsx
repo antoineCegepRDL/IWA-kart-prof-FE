@@ -19,7 +19,7 @@ export default function SendMessage() {
   }, [])
 
   const calculateNewTotal = (products: Product[]) => {
-    const total = products.reduce((acc, x) => acc + x.quantityToBuy * (x.discountPercentage > 0 ? x.discountPercentage * x.price : x.price)
+    const total = products.reduce((acc, x) => acc + x.quantityToBuy * ((1-x.discountPercentage) * x.price)
       , 0)
     setTotal(total)
   }

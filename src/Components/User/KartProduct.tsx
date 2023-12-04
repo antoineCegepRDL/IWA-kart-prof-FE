@@ -19,7 +19,7 @@ export default function KartProduct({ product, onChangeQuatity, onRemoveProduct 
     }
   }
 
-  const total = product.quantityToBuy * (product.discountPercentage > 0 ? product.price * product.discountPercentage : product.price)
+  const total = product.quantityToBuy * (product.price * (1 - product.discountPercentage))
 
   return (
     <div className='product'>
@@ -40,7 +40,7 @@ export default function KartProduct({ product, onChangeQuatity, onRemoveProduct 
         <span className='kart-button button' onClick={() => onRemoveProduct(product.id) }>X</span>
       </div>
       <div className='totalAmount'>
-        <p className="price">{total.toFixed(2)}</p>
+        <p className="price">{total.toFixed(2)} $</p>
       </div>
     </div>
   )
