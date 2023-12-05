@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { TextareaHTMLAttributes, useEffect, useState } from 'react';
 import { GET, POST } from '../../composables/server';
 import Product from '../../types/Product';
 import Brand from '../../types/Brand';
@@ -19,16 +19,15 @@ export default function SendMessage() {
   const [formData, setFormData] = useState<Product>({
     id: undefined,
     brandId: null,
-    name: 'test',
-    description: 'test',
+    name: '',
+    description: '',
     discountPercentage: 0,
-    imageUrl: 'test',
-    isDiscount: false,
-    price: 1,
-    quantity: 1
+    imageUrl: '',
+    price: 0,
+    quantity: 0
   } as any)
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
