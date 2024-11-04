@@ -2,36 +2,34 @@ import { useEffect, useState } from 'react';
 import Category from '#types/Category';
 import { useNavigate, useParams } from 'react-router-dom';
 import useCategoryService from '#composables/services/useCategoryService';
+import { useForm } from 'react-hook-form';
 
 const CategoryPage = () => {
   const { id } = useParams();
   const { postCategory, patchCategory, getCategory } = useCategoryService();
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState<Category>({
-    name: '',
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Category>({
+    defaultValues: async () => {
+      if (id) {
+        return getCategory(id);
+      }
+      return {
+        name: '',
+      };
+    },
   });
 
-  useEffect(() => {
-    if (id) {
-      getCategory(id, setFormData);
-    }
-  }, [id]);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (category: Category) => {
     try {
-      e.preventDefault();
       if (id) {
-        await patchCategory({ id, ...formData });
+        await patchCategory({ id, ...category });
       } else {
-        await postCategory(formData);
+        await postCategory(category);
       }
     } catch (error) {
       console.error(error);
@@ -42,16 +40,15 @@ const CategoryPage = () => {
 
   return (
     <div className="brand-wrapper">
-      <h1>Ajouter une marque</h1>
-      <form onSubmit={handleSubmit}>
+      <h1>Ajouter une catégorie</h1>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="name">
-          Nom de la marque
+          Nom de la catégorie
           <input
             type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
+            {...register('name', { required: 'Le nom est requis' })}
           />
+          {errors.name && <span className="error-message">{errors.name.message}</span>}
         </label>
 
         <input

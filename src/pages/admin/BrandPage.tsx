@@ -15,8 +15,7 @@ const BrandPage = () => {
   } = useForm<Brand>({
     defaultValues: async () => {
       if (id) {
-        const brand = await getBrand(id);
-        return brand;
+        return getBrand(id);
       }
       return {
         logoUrl: '',

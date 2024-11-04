@@ -1,34 +1,35 @@
 import DetailedCategory from '#types/DetailedCategory';
+import { UseFormRegister } from 'react-hook-form';
+import Item from '../types/Item';
 
 interface Props {
-  categories: DetailedCategory[];
-  selectedCategoriesId: string[];
-  onChange: (ids: string[]) => void;
+  allCategories: DetailedCategory[];
+  register: UseFormRegister<Item>;
+  errorMessage: string;
 }
 
-const ACategoriesCheckboxList = ({ categories, selectedCategoriesId, onChange }: Props) => {
-  const handleCheckboxChange = (category: DetailedCategory) => {
-    const newCategoriesId = selectedCategoriesId.includes(category.id)
-      ? selectedCategoriesId.filter((id) => id !== category.id)
-      : [...selectedCategoriesId, category.id];
-    onChange(newCategoriesId);
-  };
-
+const ACategoriesCheckboxList = ({ allCategories, register, errorMessage }: Props) => {
   return (
     <div>
-      {categories.map((category) => (
+      {allCategories.map((category) => (
         <div key={category.id}>
-          <label>
+          <label htmlFor={`category-${category.id}`}>
             <input
               type="checkbox"
+              id={`category-${category.id}`}
               value={category.id}
-              checked={selectedCategoriesId.includes(category.id)}
-              onChange={() => handleCheckboxChange(category)}
+              {...register('categoriesId', {
+                validate: {
+                  required: (value) => (value && value.length > 0) || 'Au moins une catégorie doit être sélectionnée',
+                  maxCategories: (value) => value.length <= 3 || 'On ne peut pas avoir plus de trois catégories',
+                },
+              })}
             />
             {category.name}
           </label>
         </div>
       ))}
+      {errorMessage && <span className="error-message">{errorMessage}</span>}
     </div>
   );
 };

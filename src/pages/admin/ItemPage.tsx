@@ -7,6 +7,7 @@ import DetailedBrand from '#types/DetailedBrand';
 import useCategoryService from '#composables/services/useCategoryService';
 import useItem from '#composables/services/useItemService';
 import ACategoriesCheckboxList from '../../components/ACategoriesCheckboxList';
+import { useForm } from 'react-hook-form';
 
 const ItemPage = () => {
   const { id } = useParams();
@@ -22,39 +23,31 @@ const ItemPage = () => {
     getCategories(setCategories);
   }, []);
 
-  const [formData, setFormData] = useState<Item>({
-    name: '',
-    description: '',
-    discountPercentage: 0,
-    imageUrl: '',
-    price: 0,
-    quantity: 0,
-    brandId: '',
-    categoriesId: [],
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Item>({
+    defaultValues: async () => {
+      if (id) {
+        return getItem(id);
+      }
+      return {
+        logoUrl: '',
+        name: '',
+        brandId: '',
+        categoriesId: [],
+        description: '',
+        discountPercentage: 0,
+        imageUrl: '',
+        price: 0,
+        quantity: 0,
+      };
+    },
   });
 
-  useEffect(() => {
-    if (id) {
-      console.log('🚀 ~ useEffect ~ id:', id);
-      getItem(id, setFormData);
-    }
-  }, []);
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleChange = ({ name, value }: { name: string; value: any }) => {
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (item: Item) => {
     try {
-      e.preventDefault();
-      const item = formData;
-      item.price = +item.price;
-      item.discountPercentage = +item.discountPercentage;
-      item.quantity = +item.quantity;
       if (id) {
         await patchItem({ item, id });
       } else {
@@ -70,69 +63,78 @@ const ItemPage = () => {
   return (
     <div className="product-wrapper">
       <h1>Nouveau produit</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="name">
           Nom du produit
           <input
-            name="name"
-            value={formData.name}
-            onChange={(e) => handleChange(e.target)}
+            id="name"
+            {...register('name', { required: 'Le nom est requis' })}
           />
+          {errors.name && <span className="error-message">{errors.name.message}</span>}
         </label>
 
         <label htmlFor="description">
           Description du procuit
           <textarea
-            name="description"
-            value={formData.description}
-            onChange={(e) => handleChange(e.target)}
+            id="description"
+            {...register('description', { required: 'La description est requise' })}
           />
+          {errors.description && <span className="error-message">{errors.description.message}</span>}
         </label>
 
         <label htmlFor="price">
           Prix
           <input
+            id="price"
             type="number"
-            name="price"
-            value={formData.price}
-            onChange={(e) => handleChange(e.target)}
+            {...register('price', {
+              required: 'Le prix est requis',
+              min: { value: 0.01, message: 'Le prix doit être positif et plus grand que 0' },
+            })}
           />
+          {errors.price && <span className="error-message">{errors.price.message}</span>}
         </label>
 
         <label htmlFor="quantity">
           Quantité en inventaire
           <input
+            id="quantity"
             type="number"
-            name="quantity"
-            value={formData.quantity}
-            onChange={(e) => handleChange(e.target)}
+            {...register('quantity', {
+              required: 'La quantitée est requise',
+              min: { value: 1, message: 'La quantité doit être positive et plus grand que 1' },
+            })}
           />
+          {errors.quantity && <span className="error-message">{errors.quantity.message}</span>}
         </label>
 
         <label htmlFor="discountPercentage">
           Pourcentage de rabais
           <input
+            id="discountPercentage"
             type="number"
-            name="discountPercentage"
-            value={formData.discountPercentage}
-            onChange={(e) => handleChange(e.target)}
+            {...register('discountPercentage', {
+              required: 'Le pourcentage de rabais est requis',
+              min: { value: 0, message: 'Le pourcentage doit être positif' },
+              max: { value: 1, message: 'Le pourcentage ne doit pas dépasser 1' },
+            })}
           />
+          {errors.discountPercentage && <span className="error-message">{errors.discountPercentage.message}</span>}
         </label>
 
         <label htmlFor="imageUrl">
           Url de l'image du produit
           <input
-            name="imageUrl"
-            value={formData.imageUrl}
-            onChange={(e) => handleChange(e.target)}
+            id="imageUrl"
+            {...register('imageUrl', { required: "L'URL de l'image est requise" })}
           />
+          {errors.imageUrl && <span className="error-message">{errors.imageUrl.message}</span>}
         </label>
 
         <label htmlFor="brandId">
           <select
-            name="brandId"
             id="brandId"
-            onChange={(e) => handleChange(e.target)}
+            {...register('brandId', { required: 'La marque est requise' })}
           >
             <option value="">Choisir une valeur</option>
             {brands.map((brand) => (
@@ -144,17 +146,17 @@ const ItemPage = () => {
               </option>
             ))}
           </select>
+          {errors.brandId && <span className="error-message">{errors.brandId.message}</span>}
         </label>
 
         <div>
           <h3>Catégories</h3>
           <ACategoriesCheckboxList
-            categories={categories}
-            selectedCategoriesId={formData.categoriesId}
-            onChange={(ids) => handleChange({ name: 'categoriesId', value: ids })}
+            allCategories={categories}
+            errorMessage={errors.categoriesId?.message || ''}
+            register={register}
           />
         </div>
-
         <input
           type="submit"
           className="button"

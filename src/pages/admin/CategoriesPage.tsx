@@ -50,7 +50,7 @@ const CategoriesPage = () => {
           </table>
         )}
       </div>
-      <Link to="/admin/category">Créer une nouvelle marque</Link>
+      <Link to="/admin/category">Créer une nouvelle catégorie</Link>
     </div>
   );
 };
