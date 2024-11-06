@@ -1,4 +1,4 @@
-.product-wrapper, .brand-wrapper {
+.item-wrapper, .brand-wrapper {
   margin: 0 100px;
   h1 {
     font-size: 64px;
@@ -26,7 +26,7 @@
   }
 }
 
-.products-wrapper, .brands-wrapper {
+.items-wrapper, .brands-wrapper {
   margin: 0 100px;
   h1 {
     font-size: 64px;
@@ -38,7 +38,7 @@
     line-height: normal;
   }
 
-  .products-list, .brand-list {
+  .items-list, .brand-list {
     img {
       width: 100px;
       height: 100px;

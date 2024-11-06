@@ -1,7 +1,19 @@
 import { Outlet, Link } from 'react-router-dom';
 import '#styles/layout.scss';
 import APropos from '#assets/AProposBackground.png';
+import { useEffect, useState } from 'react';
+import useCategoryService from '#composables/services/useCategoryService';
+import DetailedCategory from '#types/DetailedCategory';
+
 const UserLayout = () => {
+  const [categories, setCategories] = useState<DetailedCategory[]>([]);
+  const { getCategories } = useCategoryService();
+  useEffect(() => {
+    const fetchCategories = async () => {
+      setCategories(await getCategories());
+    };
+    fetchCategories();
+  }, []);
   return (
     <>
       <header>
@@ -26,12 +38,16 @@ const UserLayout = () => {
           </svg>
           <p className="text">LOGO</p>
         </Link>
-        <Category name="Marques"></Category>
-        <Category name="Catégorie 1"></Category>
-        <Category name="Catégorie 2"></Category>
-        <Category name="Catégorie 3"></Category>
-        <Category name="Catégorie 4"></Category>
-        <Category name="Promotions"></Category>
+        <nav>
+          {categories.map((category) => (
+            <div
+              className="category"
+              key={category.id}
+            >
+              <Link to={`/category/${category.id}`}>{category.name}</Link>
+            </div>
+          ))}
+        </nav>
         <div className="side">
           <div>
             <Link to="/kart">Panier</Link>
@@ -56,9 +72,5 @@ const UserLayout = () => {
     </>
   );
 };
-
-function Category({ name }: { name: string }) {
-  return <div className="category">{name}</div>;
-}
 
 export default UserLayout;

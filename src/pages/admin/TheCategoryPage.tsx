@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import Category from '#types/Category';
 import { useNavigate, useParams } from 'react-router-dom';
 import useCategoryService from '#composables/services/useCategoryService';

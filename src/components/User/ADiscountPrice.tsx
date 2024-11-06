@@ -1,14 +1,14 @@
-import Product from '#types/Item';
+import AItem from '#types/Item';
 
 interface Props {
-  product: Product;
+  item: AItem;
 }
 
-const ADiscountPrice = ({ product }: Props) => {
+const ADiscountPrice = ({ item }: Props) => {
   return (
     <div className="price">
-      <p className="old-price">{product.price.toFixed(2)}</p>
-      <p className="regular-price">{(product.price * (1 - product.discountPercentage)).toFixed(2)}</p>
+      <p className="old-price">{item.price.toFixed(2)}</p>
+      <p className="regular-price">{(item.price * (1 - item.discountPercentage)).toFixed(2)}</p>
     </div>
   );
 };

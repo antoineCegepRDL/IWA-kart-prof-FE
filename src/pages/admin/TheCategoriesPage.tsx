@@ -10,7 +10,10 @@ const CategoriesPage = () => {
   const [categories, setCategories] = useState<DetailedCategory[]>([]);
 
   useEffect(() => {
-    getCategories(setCategories);
+    const fetchCategories = async () => {
+      setCategories(await getCategories());
+    };
+    fetchCategories();
   }, []);
 
   const handleDeleteItem = async (id: string) => {

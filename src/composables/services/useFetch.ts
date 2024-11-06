@@ -87,6 +87,9 @@ const useFetch = () => {
         throw new Error(`Error: ${response.status} - ${response.statusText}`);
       }
     }
+    if (response.status === 204) {
+      return undefined as T;
+    }
     return (await response.json()) as T;
   }
   return { GET, POST, PATCH, DELETE, PUT };

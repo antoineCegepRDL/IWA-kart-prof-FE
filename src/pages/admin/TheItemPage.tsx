@@ -19,8 +19,15 @@ const ItemPage = () => {
   const [categories, setCategories] = useState<DetailedCategory[]>([]);
 
   useEffect(() => {
-    getBrands(setBrands);
-    getCategories(setCategories);
+    const fetchBrands = async () => {
+      setBrands(await getBrands());
+    };
+
+    const fetchCategories = async () => {
+      setCategories(await getCategories());
+    };
+    fetchBrands();
+    fetchCategories();
   }, []);
 
   const {
@@ -61,7 +68,7 @@ const ItemPage = () => {
   };
 
   return (
-    <div className="product-wrapper">
+    <div className="item-wrapper">
       <h1>Nouveau produit</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="name">
@@ -112,7 +119,6 @@ const ItemPage = () => {
           Pourcentage de rabais
           <input
             id="discountPercentage"
-            type="number"
             {...register('discountPercentage', {
               required: 'Le pourcentage de rabais est requis',
               min: { value: 0, message: 'Le pourcentage doit être positif' },
@@ -160,7 +166,7 @@ const ItemPage = () => {
         <input
           type="submit"
           className="button"
-          value="Créer"
+          value={id ? 'Modifier' : 'Créer'}
         />
       </form>
     </div>

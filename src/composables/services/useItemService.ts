@@ -1,5 +1,6 @@
 import DetailedItem from '#types/DetailedItem';
 import Item from '#types/Item';
+import OrderItem from '#types/OrderItem';
 import useBrandService from './useBrandService';
 import useCategoryService from './useCategoryService';
 import useFetch from './useFetch';
@@ -18,39 +19,28 @@ const useItemService = () => {
     }
   };
 
-  const getItem = async (
-    id: string,
-    setItem: React.Dispatch<React.SetStateAction<Item>> | undefined = undefined
-  ): Promise<DetailedItem> => {
+  const orderItems = async (items: OrderItem[]): Promise<void> => {
+    await POST<OrderItem[]>('order', items);
+  };
+
+  const getItem = async (id: string): Promise<DetailedItem> => {
     const item = await GET<DetailedItem>(`item/${id}`);
     if (item) {
-      if (setItem) {
-        setItem(item);
-      }
-      return item;
+      return await populateItem(item);
     } else {
-      throw new Error('Impossible de créer la tâche');
+      throw new Error("Impossible de récupérer l'item");
     }
   };
 
-  const getItems = async (
-    setItems: React.Dispatch<React.SetStateAction<DetailedItem[]>> | undefined = undefined
-  ): Promise<DetailedItem[]> => {
-    const items = await GET<DetailedItem[]>('items');
+  const getItems = async (getParms = ''): Promise<DetailedItem[]> => {
+    const route = getParms ? `items?${getParms}` : 'items';
+    const items = await GET<DetailedItem[]>(route);
     if (items) {
       await Promise.all(
         items.map(async (item) => {
-          item.brand = await getBrand(item.brandId);
-          item.categories = await Promise.all(
-            item.categoriesId.map(async (id) => {
-              return await getCategory(id);
-            })
-          );
+          return await populateItem(item);
         })
       );
-      if (setItems) {
-        setItems(items);
-      }
       return items;
     } else {
       throw new Error('Impossible de récupérer les tâches');
@@ -66,7 +56,17 @@ const useItemService = () => {
     DELETE(`Item/${id}`);
   };
 
-  return { postItem, getItem, getItems, patchItem, deleteItem };
+  const populateItem = async (item: DetailedItem): Promise<DetailedItem> => {
+    item.brand = await getBrand(item.brandId);
+    item.categories = await Promise.all(
+      item.categoriesId.map(async (id) => {
+        return await getCategory(id);
+      })
+    );
+    return item;
+  };
+
+  return { postItem, getItem, getItems, patchItem, deleteItem, orderItems };
 };
 
 export default useItemService;

@@ -10,7 +10,10 @@ const ItemsPage = () => {
   const [items, setItems] = useState<DetailedItem[]>([]);
 
   useEffect(() => {
-    getItems(setItems);
+    const fetchItems = async () => {
+      setItems(await getItems());
+    };
+    fetchItems();
   }, []);
   const handleDelete = async (id: string) => {
     await deleteItem(id);
@@ -21,9 +24,9 @@ const ItemsPage = () => {
     navigate(`/admin/item/${id}`);
   };
   return (
-    <div className="products-wrapper">
+    <div className="items-wrapper">
       <h1>Liste de des produits</h1>
-      <div className="products-list">
+      <div className="items-list">
         {items.length === 0 ? (
           <p>Pas de produits</p>
         ) : (
@@ -44,12 +47,12 @@ const ItemsPage = () => {
               </tr>
             </thead>
             <tbody>
-              {items.map((product) => (
+              {items.map((item) => (
                 <AItem
-                  item={product}
+                  item={item}
                   onDelete={handleDelete}
                   onEdit={handleEdit}
-                  key={product.id}
+                  key={item.id}
                 ></AItem>
               ))}
             </tbody>

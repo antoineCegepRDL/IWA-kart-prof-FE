@@ -10,7 +10,10 @@ const BrandsPage = () => {
   const [brands, setBrands] = useState<DetailedBrand[]>([]);
 
   useEffect(() => {
-    getBrands(setBrands);
+    const fetchBrands = async () => {
+      setBrands(await getBrands());
+    };
+    fetchBrands();
   }, []);
 
   const onDeleteItem = async (id: string) => {

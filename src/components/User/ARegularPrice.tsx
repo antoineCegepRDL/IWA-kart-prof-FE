@@ -1,13 +1,13 @@
-import Product from '#types/Item';
+import Item from '#types/Item';
 
 interface Props {
-  product: Product;
+  item: Item;
 }
 
-const ARegularPrice = ({ product }: Props) => {
+const ARegularPrice = ({ item }: Props) => {
   return (
     <div className="price">
-      <p className="regular-price">{product.price.toFixed(2)}</p>
+      <p className="regular-price">{item.price.toFixed(2)}</p>
     </div>
   );
 };

@@ -14,29 +14,18 @@ const useCategoryService = () => {
     }
   };
 
-  const getCategory = async (
-    id: string,
-    setCategory: React.Dispatch<React.SetStateAction<Category>> | undefined = undefined
-  ): Promise<DetailedCategory> => {
+  const getCategory = async (id: string): Promise<DetailedCategory> => {
     const category = await GET<DetailedCategory>(`category/${id}`);
     if (category) {
-      if (setCategory) {
-        setCategory(category);
-      }
       return category;
     } else {
-      throw new Error('Impossible de créer la tâche');
+      throw new Error('Impossible de récupérer la catégorie');
     }
   };
 
-  const getCategories = async (
-    setCategories: React.Dispatch<React.SetStateAction<DetailedCategory[]>> | undefined = undefined
-  ): Promise<DetailedCategory[]> => {
+  const getCategories = async (): Promise<DetailedCategory[]> => {
     const categories = await GET<DetailedCategory[]>('Categories');
     if (categories) {
-      if (setCategories) {
-        setCategories(categories);
-      }
       return categories;
     } else {
       throw new Error('Impossible de récupérer les catégories');

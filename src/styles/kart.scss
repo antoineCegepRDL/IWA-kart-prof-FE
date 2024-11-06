@@ -1,8 +1,8 @@
 .list {
   height: auto;
-  .kart-product {
+  .kart-item {
     height: auto;
-    .product {
+    .item {
       height: auto;
     }
   }
@@ -40,7 +40,7 @@ span+.price, .total .price, .totalAmount p {
   align-items: center;
 }
 
-.product {
+.item {
   height: 100%;
 }
 

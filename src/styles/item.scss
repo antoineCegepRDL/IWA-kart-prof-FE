@@ -1,10 +1,10 @@
-.product-details {
+.item-details {
   hr {
     visibility: hidden;
     display: none;
   }
 
-  .product {
+  .item {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
@@ -21,7 +21,7 @@
   }
 }
 
-.product {
+.item {
   max-width: 500px;
   height: 500px;
   display: flex;

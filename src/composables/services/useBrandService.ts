@@ -29,17 +29,12 @@ const useBrandService = () => {
     }
   };
 
-  const getBrands = async (
-    setBrands: React.Dispatch<React.SetStateAction<DetailedBrand[]>> | undefined = undefined
-  ): Promise<DetailedBrand[]> => {
+  const getBrands = async (): Promise<DetailedBrand[]> => {
     const brands = await GET<DetailedBrand[]>('brands');
     if (brands) {
-      if (setBrands) {
-        setBrands(brands);
-      }
       return brands;
     } else {
-      throw new Error('Impossible de récupérer les tâches');
+      throw new Error('Impossible de récupérer les marques');
     }
   };
 

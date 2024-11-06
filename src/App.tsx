@@ -1,16 +1,16 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import UserLayout from '#layout/UserLayout';
-import AdminLayout from '#layout/AdminLayout';
+import UserLayout from '#layout/TheUserLayout';
+import AdminLayout from '#layout/TheAdminLayout';
 import '#styles/global.scss';
-import BrandPage from '#pages/admin/BrandPage';
-import CategoryPage from '#pages/admin/CategoryPage';
-import CategoriesPage from '#pages/admin/CategoriesPage';
-import ItemsPage from '#pages/admin/ItemsPage';
-import HomePage from '#pages/user/HomePage';
-import UserProductPage from '#pages/user/Product';
-import Kart from '#pages/user/KartPage';
-import ItemPage from '#pages/admin/ItemPage';
-import BrandsPage from '#pages/admin/BrandsPage';
+import TheAdmin from '#pages/admin/TheBrandPage';
+import TheAdminCategoryPage from '#pages/admin/TheCategoryPage';
+import TheAdminCategoriesPage from '#pages/admin/TheCategoriesPage';
+import TheAdminItemsPage from '#pages/admin/TheItemsPage';
+import TheUserHomePage from '#pages/user/TheHomePage';
+import TheUserItemPage from '#pages/user/TheItemPage';
+import TheKartPage from '#pages/user/TheKartPage';
+import TheAdminItemPage from '#pages/admin/TheItemPage';
+import TheAdminBrandsPage from '#pages/admin/TheBrandsPage';
 
 export default function App() {
   return (
@@ -23,39 +23,39 @@ export default function App() {
           >
             <Route
               path="brand"
-              element={<BrandPage />}
+              element={<TheAdmin />}
             ></Route>
             <Route
               path="brand/:id"
-              element={<BrandPage />}
+              element={<TheAdmin />}
             ></Route>
             <Route
               path="categories"
-              element={<CategoriesPage />}
+              element={<TheAdminCategoriesPage />}
             ></Route>
             <Route
               path="category"
-              element={<CategoryPage />}
+              element={<TheAdminCategoryPage />}
             ></Route>
             <Route
               path="category/:id"
-              element={<CategoryPage />}
+              element={<TheAdminCategoryPage />}
             ></Route>
             <Route
               path="brands"
-              element={<BrandsPage />}
+              element={<TheAdminBrandsPage />}
             ></Route>
             <Route
               path="items"
-              element={<ItemsPage />}
+              element={<TheAdminItemsPage />}
             ></Route>
             <Route
               path="item/:id"
-              element={<ItemPage />}
+              element={<TheAdminItemPage />}
             ></Route>
             <Route
               path="item"
-              element={<ItemPage />}
+              element={<TheAdminItemPage />}
             ></Route>
           </Route>
           <Route
@@ -64,15 +64,15 @@ export default function App() {
           >
             <Route
               path="kart"
-              element={<Kart />}
+              element={<TheKartPage />}
             ></Route>
             <Route
-              path="product/:id"
-              element={<UserProductPage />}
+              path="item/:id"
+              element={<TheUserItemPage />}
             ></Route>
             <Route
               index
-              element={<HomePage />}
+              element={<TheUserHomePage />}
             ></Route>
           </Route>
         </Routes>

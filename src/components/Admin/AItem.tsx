@@ -6,7 +6,7 @@ interface Props {
   onEdit: (id: string) => void;
 }
 
-const AProduct = ({ item, onEdit, onDelete }: Props) => {
+const AItem = ({ item, onEdit, onDelete }: Props) => {
   return (
     <tr>
       <td>{item.name}</td>
@@ -44,4 +44,4 @@ const AProduct = ({ item, onEdit, onDelete }: Props) => {
   );
 };
 
-export default AProduct;
+export default AItem;
