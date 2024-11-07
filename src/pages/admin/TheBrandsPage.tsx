@@ -16,12 +16,12 @@ const BrandsPage = () => {
     fetchBrands();
   });
 
-  const onDeleteItem = async (id: string) => {
+  const handleDeleteItem = async (id: string) => {
     await deleteBrand(id);
     setBrands([...brands.filter((x) => x.id !== id)]);
   };
 
-  const onEdit = async (id: string) => {
+  const handleEdit = async (id: string) => {
     navigate(`/admin/brand/${id}`);
   };
 
@@ -45,8 +45,8 @@ const BrandsPage = () => {
               {brands.map((brand) => (
                 <BrandComponent
                   brand={brand}
-                  onDelete={onDeleteItem}
-                  onEdit={onEdit}
+                  onDelete={handleDeleteItem}
+                  onEdit={handleEdit}
                   key={brand.id}
                 ></BrandComponent>
               ))}

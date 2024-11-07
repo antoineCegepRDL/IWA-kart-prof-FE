@@ -33,7 +33,7 @@ const TheBrandPage = () => {
   return (
     <>
       <div className="wrapper">
-        <h1>Tous nos items de la catégorie : {brand?.name}</h1>
+        <h1>Tous nos items de la marque : {brand?.name}</h1>
         <AItemList
           items={items}
           title={brand?.name ?? ''}
