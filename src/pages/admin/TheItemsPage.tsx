@@ -1,72 +1,90 @@
-import { useEffect, useState } from 'react';
-import AItem from '#components/Admin/AItem';
-import DetailedItem from '#types/DetailedItem';
-import { Link, useNavigate } from 'react-router-dom';
-import useItem from '#composables/services/useItemService';
-
-const ItemsPage = () => {
-  const navigate = useNavigate();
-  const { deleteItem, getItems } = useItem();
-  const [items, setItems] = useState<DetailedItem[]>([]);
-
-  useEffect(() => {
-    const fetchItems = async () => {
-      setItems(await getItems());
-    };
-    fetchItems();
-  });
-  const handleDelete = async (id: string) => {
-    await deleteItem(id);
-    setItems([...items.filter((x) => x.id !== id)]);
-  };
-
-  const handleEdit = async (id: string) => {
-    navigate(`/admin/item/${id}`);
-  };
+const TheItemsPage = () => {
   return (
     <div className="items-wrapper">
       <h1>Liste de des produits</h1>
       <div className="items-list">
-        {items.length === 0 ? (
-          <p>Pas de produits</p>
-        ) : (
-          <table>
-            <thead>
-              <tr>
-                <th>nom</th>
-                <th>description</th>
-                <th>prix</th>
-                <th>rabais</th>
-                <th>quantité</th>
-                <th>image</th>
-                <th>marque</th>
-                <th>logo de la marque</th>
-                <th>catégories</th>
-                <th>Modifier</th>
-                <th>Supprimer</th>
-              </tr>
-            </thead>
-            <tbody>
-              {items.map((item) => (
-                <AItem
-                  item={item}
-                  onDelete={handleDelete}
-                  onEdit={handleEdit}
-                  key={item.id}
-                ></AItem>
-              ))}
-            </tbody>
-          </table>
-        )}
+        <table>
+          <thead>
+            <tr>
+              <th>nom</th>
+              <th>description</th>
+              <th>prix</th>
+              <th>rabais</th>
+              <th>quantité</th>
+              <th>image</th>
+              <th>marque</th>
+              <th>logo de la marque</th>
+              <th>catégories</th>
+              <th>Modifier</th>
+              <th>Supprimer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Seagate</td>
+              <td>Super disque dur qui va vite vite vite. 35mo.</td>
+              <td>200$</td>
+              <td>0.1%</td>
+              <td>987</td>
+              <td>
+                <img
+                  src="https://c1.neweggimages.com/ProductImageCompressAll1280/22-183-793-V06.jpg"
+                  alt=""
+                />
+              </td>
+              <td>Seagate</td>
+              <td>
+                <img
+                  src="https://c1.neweggimages.com/brandimage/Brand1305.gif"
+                  alt=""
+                />
+              </td>
+              <td>test1, test2</td>
+              <td>
+                <p>Modifier</p>
+              </td>
+              <td>
+                <p className="supprimer">Supprimer</p>
+              </td>
+            </tr>
+            <tr>
+              <td>Un homme heureux </td>
+              <td>Enleve la poussieree</td>
+              <td>1000$</td>
+              <td>0.5%</td>
+              <td>974</td>
+              <td>
+                <img
+                  src="https://c1.neweggimages.com/productimage/nb1280/A4RES2304100HEJI748.jpg"
+                  alt=""
+                />
+              </td>
+              <td>RedDragon</td>
+              <td>
+                <img
+                  src="https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-original-577x577/s3/032018/untitled-1_521.png?C6Bm9TeR9x1Pdtb4cBibXkOAxlVmhDHv&amp;itok=HoYxL5ui"
+                  alt=""
+                />
+              </td>
+              <td>test1, test2</td>
+              <td>
+                <p>Modifier</p>
+              </td>
+              <td>
+                <p className="supprimer">Supprimer</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <Link
+      <a
         id="new-item"
-        to="/admin/item"
+        href="/admin/item"
       >
         Créer un nouveau produit
-      </Link>
+      </a>
     </div>
   );
 };
 
-export default ItemsPage;
+export default TheItemsPage;
