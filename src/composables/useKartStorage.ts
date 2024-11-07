@@ -5,28 +5,31 @@ import DetailedItem from '../types/DetailedItem';
 const useKartStorage = () => {
   const { getItem, removeItem, setItem } = useLocalStorage<KartItem[]>();
   const getItemsFromStorage = (): KartItem[] => {
-    return getItem() ?? [];
+    // Retourne la liste des items du local storage.
+    // Si la liste n'exsite pas, retourne un tableau vide avec l'opérateur ??.
   };
 
   const removeItemFromStorage = (id: string): void => {
-    const items = getItemsFromStorage();
-    setItem(items.filter((x) => x.id !== id));
+    // Va chercher la liste des items dans le local storage.
+    // Retire l'item avec l'id correspondant à celui passé en paramètre.
+    // Et met à jour la liste dans le local storage.
   };
 
   const updateItemFromStorage = (item: KartItem): void => {
-    const items = getItemsFromStorage();
-    setItem(items.map((x) => (x.id === item.id ? item : x)));
+    // Va chercher la liste des items dans le local storage.
+    // Met à jour l'item correspondant à celui passé en paramètre.
+    // Et met à jour la liste dans le local storage.
   };
 
   const addItemFromStorage = (item: DetailedItem): void => {
-    let items = getItemsFromStorage();
-    items = items.filter((x) => x.id !== item.id);
-    items.push({ ...item, quantityToBuy: 1 });
-    setItem(items);
+    // Va chercher la liste des items dans le local storage.
+    // Filtre la liste pour s'assurer que l'item n'est pas présent deux fois
+    // Ajoute l'item avec une quantité de 1. (Voir les todos sur comment on mettait à jour le todo avec l'opérateur ...)
+    // Et met à jour la liste dans le local storage.
   };
 
   const clearStorage = (): void => {
-    removeItem();
+    // Retire la liste du storage
   };
 
   return {
