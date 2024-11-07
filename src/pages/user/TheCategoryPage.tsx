@@ -1,45 +1,34 @@
 import '#styles/home.scss';
-import { useEffect, useState } from 'react';
-import DetailedItem from '#types/DetailedItem';
-import AItemList from '#components/User/AItemList';
-import useItemService from '#composables/services/useItemService';
-import useCategoryService from '#composables/services/useCategoryService';
-import { useParams } from 'react-router-dom';
-import DetailedCategory from '../../types/DetailedCategory';
 
 const TheCategoryPage = () => {
-  const [items, setItems] = useState<DetailedItem[]>([]);
-  const [category, setCategory] = useState<DetailedCategory>();
-
-  const { getItemsByCategoryId } = useItemService();
-  const { getCategory } = useCategoryService();
-
-  const { id } = useParams();
-  useEffect(() => {
-    const fetchItems = async () => {
-      if (id) {
-        setItems(await getItemsByCategoryId(id));
-      }
-    };
-    const fetchCategory = async () => {
-      if (id) {
-        setCategory(await getCategory(id));
-      }
-    };
-    fetchItems();
-    fetchCategory();
-  }, [id]);
-
   return (
-    <>
+    <div className="wrapper">
       <div className="wrapper">
-        <h1>Tous nos items de la catégorie : {category?.name}</h1>
-        <AItemList
-          items={items}
-          title={category?.name ?? ''}
-        ></AItemList>
+        <h1>Tous nos items de la marque : Seagate</h1>
+        <div className="items">
+          <h2 className="section-title">Seagate</h2>
+          <div className="list">
+            <div className="item">
+              <div className="imageContainer">
+                <img
+                  src="https://c1.neweggimages.com/ProductImageCompressAll1280/22-183-793-V06.jpg"
+                  alt=""
+                />
+              </div>
+              <hr />
+              <div>
+                <p className="item-name">Seagate</p>
+                <p className="brand-name">Seagate</p>
+                <div className="price">
+                  <p className="old-price">200.00</p>
+                  <p className="regular-price">180.00</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

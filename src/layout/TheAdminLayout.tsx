@@ -33,12 +33,6 @@ export default function AdminLayout() {
           <li>
             <Link to="/admin/brands">Marques</Link>
           </li>
-          <li>
-            <Link to="/admin/items">Produits</Link>
-          </li>
-          <li>
-            <Link to="/admin/categories">Catégories</Link>
-          </li>
         </ul>
       </nav>
 

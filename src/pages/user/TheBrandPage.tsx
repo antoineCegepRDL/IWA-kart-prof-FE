@@ -1,46 +1,35 @@
 import '#styles/home.scss';
-import { useEffect, useState } from 'react';
-import DetailedItem from '#types/DetailedItem';
-import AItemList from '#components/User/AItemList';
-import useItemService from '#composables/services/useItemService';
-import useBrandService from '#composables/services/useBrandService';
-import { useParams } from 'react-router-dom';
-import DetailedBrand from '../../types/DetailedBrand';
 
-const TheBrandPage = () => {
-  const [items, setItems] = useState<DetailedItem[]>([]);
-  const [brand, setBrand] = useState<DetailedBrand>();
-
-  const { getItemsByBrandId } = useItemService();
-  const { getBrand } = useBrandService();
-
-  const { id } = useParams();
-  useEffect(() => {
-    const fetchItems = async () => {
-      if (id) {
-        setItems(await getItemsByBrandId(id));
-      }
-    };
-    const fetchBrand = async () => {
-      if (id) {
-        setBrand(await getBrand(id));
-      }
-    };
-    fetchItems();
-    fetchBrand();
-  }, [id]);
-
+const TheCategoryPage = () => {
   return (
-    <>
+    <div className="wrapper">
       <div className="wrapper">
-        <h1>Tous nos items de la catégorie : {brand?.name}</h1>
-        <AItemList
-          items={items}
-          title={brand?.name ?? ''}
-        ></AItemList>
+        <h1>Tous nos items de la marque : Test2</h1>
+        <div className="items">
+          <h2 className="section-title">Test2</h2>
+          <div className="list">
+            <div className="item">
+              <div className="imageContainer">
+                <img
+                  src="https://c1.neweggimages.com/ProductImageCompressAll1280/22-183-793-V06.jpg"
+                  alt=""
+                />
+              </div>
+              <hr />
+              <div>
+                <p className="item-name">Seagate</p>
+                <p className="brand-name">Seagate</p>
+                <div className="price">
+                  <p className="old-price">200.00</p>
+                  <p className="regular-price">180.00</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default TheBrandPage;
+export default TheCategoryPage;

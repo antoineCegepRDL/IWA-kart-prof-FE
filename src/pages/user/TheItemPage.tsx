@@ -1,69 +1,109 @@
 import '#styles/item.scss';
-import { useParams } from 'react-router-dom';
-import DetailedItem from '#types/DetailedItem';
-import { useEffect, useState } from 'react';
-import AItem from '#components/User/AItem';
-import useKartStorage from '#composables/useKartStorage';
-import AItemList from '#components/User/AItemList';
-import useItemService from '#composables/services/useItemService';
-
 const TheItemPage = () => {
-  const [item, setItem] = useState<DetailedItem>();
-  const [itemsInDiscount, setItemsInDiscount] = useState<DetailedItem[]>([]);
-  const [items, setItems] = useState<DetailedItem[]>([]);
-  const { addItemFromStorage } = useKartStorage();
-
-  const { getItem, getItems } = useItemService();
-  const { id } = useParams();
-
-  useEffect(() => {
-    const fetchItem = async () => {
-      if (id) {
-        const item = await getItem(id);
-        setItem(item);
-      }
-    };
-    const fetchItems = async () => {
-      setItemsInDiscount(await getItems('itemsOnDiscount=true&limit=3&offset=0'));
-      setItems(await getItems('limit=3&offset=0'));
-    };
-
-    fetchItem();
-    fetchItems();
-  }, [id]);
-
-  const onAddToKartClick = () => {
-    if (item) {
-      alert('Le produit a été ajouté');
-      addItemFromStorage(item);
-    }
-  };
-
   return (
-    <>
+    <div className="wrapper">
       <div className="item-details">
         <div className="item">
-          {item ? <AItem item={item}></AItem> : <></>}
-          <p>{item?.description}</p>
-          <div
-            className="button"
-            onClick={onAddToKartClick}
-          >
+          <div className="imageContainer">
+            <img
+              src="https://c1.neweggimages.com/ProductImageCompressAll1280/22-183-793-V06.jpg"
+              alt=""
+            />
+          </div>
+          <hr />
+          <div>
+            <p className="item-name">Seagate</p>
+            <p className="brand-name">Seagate</p>
+            <div className="price">
+              <p className="old-price">200.00</p>
+              <p className="regular-price">180.00</p>
+            </div>
+          </div>
+          <p>Super disque dur qui va vite vite vite. 35mo.</p>
+          <div className="button">
             <p>Ajouter au panier</p>
           </div>
         </div>
       </div>
-
-      <AItemList
-        items={items}
-        title="Vous pourriez aimer..."
-      ></AItemList>
-
-      <AItemList
-        items={itemsInDiscount}
-        title={'En rabais'}
-      ></AItemList>
-    </>
+      <div className="items">
+        <h2 className="section-title">Vous pourriez aimer...</h2>
+        <div className="list">
+          <div className="item">
+            <div className="imageContainer">
+              <img
+                src="https://c1.neweggimages.com/ProductImageCompressAll1280/22-183-793-V06.jpg"
+                alt=""
+              />
+            </div>
+            <hr />
+            <div>
+              <p className="item-name">Seagate</p>
+              <p className="brand-name">Seagate</p>
+              <div className="price">
+                <p className="old-price">200.00</p>
+                <p className="regular-price">180.00</p>
+              </div>
+            </div>
+          </div>
+          <div className="item">
+            <div className="imageContainer">
+              <img
+                src="https://c1.neweggimages.com/productimage/nb1280/A4RES2304100HEJI748.jpg"
+                alt=""
+              />
+            </div>
+            <hr />
+            <div>
+              <p className="item-name">Un homme heureux </p>
+              <p className="brand-name">RedDragon</p>
+              <div className="price">
+                <p className="old-price">1000.00</p>
+                <p className="regular-price">500.00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="items">
+        <h2 className="section-title">En rabais</h2>
+        <div className="list">
+          <div className="item">
+            <div className="imageContainer">
+              <img
+                src="https://c1.neweggimages.com/ProductImageCompressAll1280/22-183-793-V06.jpg"
+                alt=""
+              />
+            </div>
+            <hr />
+            <div>
+              <p className="item-name">Seagate</p>
+              <p className="brand-name">Seagate</p>
+              <div className="price">
+                <p className="old-price">200.00</p>
+                <p className="regular-price">180.00</p>
+              </div>
+            </div>
+          </div>
+          <div className="item">
+            <div className="imageContainer">
+              <img
+                src="https://c1.neweggimages.com/productimage/nb1280/A4RES2304100HEJI748.jpg"
+                alt=""
+              />
+            </div>
+            <hr />
+            <div>
+              <p className="item-name">Un homme heureux </p>
+              <p className="brand-name">RedDragon</p>
+              <div className="price">
+                <p className="old-price">1000.00</p>
+                <p className="regular-price">500.00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
