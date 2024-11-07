@@ -53,7 +53,12 @@ const CategoriesPage = () => {
           </table>
         )}
       </div>
-      <Link to="/admin/category">Créer une nouvelle catégorie</Link>
+      <Link
+        to="/admin/category"
+        id="new-category"
+      >
+        Créer une nouvelle catégorie
+      </Link>
     </div>
   );
 };

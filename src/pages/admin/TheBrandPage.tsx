@@ -35,7 +35,7 @@ const BrandPage = () => {
       console.error(error);
       alert('error');
     }
-    navigate('/admin/brands');
+    await navigate('/admin/brands');
   };
 
   return (
@@ -62,6 +62,7 @@ const BrandPage = () => {
         </label>
 
         <input
+          id="submit"
           type="submit"
           className="button"
           value="Submit"

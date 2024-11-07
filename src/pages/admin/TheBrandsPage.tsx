@@ -14,7 +14,7 @@ const BrandsPage = () => {
       setBrands(await getBrands());
     };
     fetchBrands();
-  }, []);
+  });
 
   const onDeleteItem = async (id: string) => {
     await deleteBrand(id);
@@ -54,7 +54,12 @@ const BrandsPage = () => {
           </table>
         )}
       </div>
-      <Link to="/admin/brand">Créer une nouvelle marque</Link>
+      <Link
+        id="new-brand"
+        to="/admin/brand"
+      >
+        Créer une nouvelle marque
+      </Link>
     </div>
   );
 };

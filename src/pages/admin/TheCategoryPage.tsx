@@ -51,6 +51,7 @@ const CategoryPage = () => {
         </label>
 
         <input
+          id="submit"
           type="submit"
           className="button"
           value="Submit"
