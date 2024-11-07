@@ -1,7 +1,7 @@
-import AItem from '#types/Item';
+import Item from '#types/Item';
 
 interface Props {
-  item: AItem;
+  item: Item;
 }
 
 const ADiscountPrice = ({ item }: Props) => {

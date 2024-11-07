@@ -1,7 +1,7 @@
 import '#styles/kart.scss';
 import KartItem from '#types/KartItem';
-import DiscountPrice from '#components/User/ADiscountPrice';
-import RegularPrice from '#components/User/ARegularPrice';
+import ADiscountPrice from '#components/User/ADiscountPrice';
+import ARegularPrice from '#components/User/ARegularPrice';
 
 interface Props {
   item: KartItem;
@@ -40,10 +40,10 @@ const TheKartItem = ({ item, onChangeQuatity, onRemoveItem }: Props) => {
       <hr />
       <p className="item-name">{item.name}</p>
       <p className="brand-name">{item.brand.name}</p>
-      {item.discountPercentage > 0 ? (
-        <DiscountPrice item={item}></DiscountPrice>
+      {item.discountPercentage ? (
+        <ADiscountPrice item={item}></ADiscountPrice>
       ) : (
-        <RegularPrice item={item}></RegularPrice>
+        <ARegularPrice item={item}></ARegularPrice>
       )}
       <div className="kart-buttons">
         <span

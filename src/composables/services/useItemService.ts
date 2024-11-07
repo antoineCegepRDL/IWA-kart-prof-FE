@@ -43,30 +43,54 @@ const useItemService = () => {
       );
       return items;
     } else {
-      throw new Error('Impossible de récupérer les tâches');
+      throw new Error('Impossible de récupérer les items');
+    }
+  };
+
+  const getItemsByCategoryId = async (categoryId: string): Promise<DetailedItem[]> => {
+    const items = await GET<DetailedItem[]>(`items/category/${categoryId}`);
+    if (items) {
+      await Promise.all(
+        items.map(async (item) => {
+          return await populateItem(item);
+        })
+      );
+      return items;
+    } else {
+      throw new Error('Impossible de récupérer les items');
+    }
+  };
+
+  const getItemsByBrandId = async (brandId: string): Promise<DetailedItem[]> => {
+    const items = await GET<DetailedItem[]>(`items/brand/${brandId}`);
+    if (items) {
+      await Promise.all(
+        items.map(async (item) => {
+          return await populateItem(item);
+        })
+      );
+      return items;
+    } else {
+      throw new Error('Impossible de récupérer les items');
     }
   };
 
   // ACM GARDER CA
   const patchItem = async ({ id, item }: { id: string; item: Item }) => {
-    PATCH<Item>(`Item/${id}`, item);
+    PATCH<Item>(`item/${id}`, item);
   };
 
   const deleteItem = async (id: string) => {
-    DELETE(`Item/${id}`);
+    DELETE(`item/${id}`);
   };
 
   const populateItem = async (item: DetailedItem): Promise<DetailedItem> => {
     item.brand = await getBrand(item.brandId);
-    item.categories = await Promise.all(
-      item.categoriesId.map(async (id) => {
-        return await getCategory(id);
-      })
-    );
+    item.categories = await Promise.all(item.categoriesId.map(async (id) => getCategory(id)));
     return item;
   };
 
-  return { postItem, getItem, getItems, patchItem, deleteItem, orderItems };
+  return { postItem, getItem, getItems, patchItem, deleteItem, orderItems, getItemsByBrandId, getItemsByCategoryId };
 };
 
 export default useItemService;

@@ -30,7 +30,7 @@ const TheItemPage = () => {
 
     fetchItem();
     fetchItems();
-  }, []);
+  }, [id]);
 
   const onAddToKartClick = () => {
     if (item) {
@@ -54,23 +54,15 @@ const TheItemPage = () => {
         </div>
       </div>
 
-      <div className="items">
-        <h2 className="section-title">Vous pourriez aimer...</h2>
-        <div className="list">
-          <div className="discount-item-home item">
-            <AItemList items={items}></AItemList>
-          </div>
-        </div>
-      </div>
+      <AItemList
+        items={items}
+        title="Vous pourriez aimer..."
+      ></AItemList>
 
-      <div className="items">
-        <h2 className="section-title">En rabais</h2>
-        <div className="list">
-          <div className="discount-item-home item">
-            <AItemList items={itemsInDiscount}></AItemList>
-          </div>
-        </div>
-      </div>
+      <AItemList
+        items={itemsInDiscount}
+        title={'En rabais'}
+      ></AItemList>
     </>
   );
 };

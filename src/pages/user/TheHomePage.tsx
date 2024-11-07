@@ -8,7 +8,7 @@ import AItemList from '#components/User/AItemList';
 import useItemService from '#composables/services/useItemService';
 import useBrandService from '../../composables/services/useBrandService';
 
-const HomePage = () => {
+const TheHomePage = () => {
   const [itemsInDiscount, setItemsInDiscount] = useState<DetailedItem[]>([]);
   const [items, setItems] = useState<DetailedItem[]>([]);
   const [brands, setBrands] = useState<DetailedBrand[]>([]);
@@ -42,19 +42,15 @@ const HomePage = () => {
         />
         <p className="welcomeMessage">50% de rabais sur + de 500 produits</p>
       </div>
-      <div className="items">
-        <h2 className="section-title">En rabais</h2>
-        <div className="list">
-          <div className="discount-item-home item">
-            <AItemList items={itemsInDiscount}></AItemList>
-          </div>
-        </div>
-      </div>
+      <AItemList
+        items={itemsInDiscount}
+        title="En rabais"
+      ></AItemList>
 
-      <div className="items">
-        <h2 className="section-title">Nos nouveautés</h2>
-        <AItemList items={items}></AItemList>
-      </div>
+      <AItemList
+        items={items}
+        title="Nos nouveautés"
+      ></AItemList>
 
       <div className="brands">
         <h2 className="section-title">Nos marques</h2>
@@ -71,4 +67,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default TheHomePage;

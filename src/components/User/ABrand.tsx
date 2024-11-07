@@ -1,19 +1,22 @@
-import Brand from '#types/Brand';
+import DetailedBrand from '#types/DetailedBrand';
+import { Link } from 'react-router-dom';
 
 interface Props {
-  brand: Brand;
+  brand: DetailedBrand;
 }
 
 const ABrand = ({ brand }: Props) => {
   return (
-    <div className="brand">
-      <img
-        src={brand.logoUrl}
-        width="100"
-        height="100"
-        alt=""
-      />
-    </div>
+    <Link to={`/brand/${brand.id}`}>
+      <div className="brand">
+        <img
+          src={brand.logoUrl}
+          width="100"
+          height="100"
+          alt=""
+        />
+      </div>
+    </Link>
   );
 };
 

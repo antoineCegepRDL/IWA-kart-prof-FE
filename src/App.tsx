@@ -9,6 +9,8 @@ import TheAdminItemsPage from '#pages/admin/TheItemsPage';
 import TheUserHomePage from '#pages/user/TheHomePage';
 import TheUserItemPage from '#pages/user/TheItemPage';
 import TheKartPage from '#pages/user/TheKartPage';
+import TheUserCategoryPage from '#pages/user/TheCategoryPage';
+import TheUserBrandPage from '#pages/user/TheBrandPage';
 import TheAdminItemPage from '#pages/admin/TheItemPage';
 import TheAdminBrandsPage from '#pages/admin/TheBrandsPage';
 
@@ -69,6 +71,14 @@ export default function App() {
             <Route
               path="item/:id"
               element={<TheUserItemPage />}
+            ></Route>
+            <Route
+              path="category/:id"
+              element={<TheUserCategoryPage />}
+            ></Route>
+            <Route
+              path="brand/:id"
+              element={<TheUserBrandPage />}
             ></Route>
             <Route
               index
