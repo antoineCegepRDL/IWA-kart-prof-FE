@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import UserLayout from '#layout/TheUserLayout';
 import AdminLayout from '#layout/TheAdminLayout';
 import '#styles/global.scss';
-import TheAdmin from '#pages/admin/TheBrandPage';
+import TheAdminBrandPage from '#pages/admin/TheBrandPage';
 import TheAdminCategoryPage from '#pages/admin/TheCategoryPage';
 import TheAdminCategoriesPage from '#pages/admin/TheCategoriesPage';
 import TheAdminItemsPage from '#pages/admin/TheItemsPage';
@@ -25,11 +25,11 @@ export default function App() {
           >
             <Route
               path="brand"
-              element={<TheAdmin />}
+              element={<TheAdminBrandPage />}
             ></Route>
             <Route
               path="brand/:id"
-              element={<TheAdmin />}
+              element={<TheAdminBrandPage />}
             ></Route>
             <Route
               path="categories"

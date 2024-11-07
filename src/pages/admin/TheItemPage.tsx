@@ -54,6 +54,9 @@ const ItemPage = () => {
   });
 
   const onSubmit = async (item: Item) => {
+    item.price = +item.price;
+    item.quantity = +item.quantity;
+    item.discountPercentage = +item.discountPercentage;
     try {
       if (id) {
         await patchItem({ item, id });
@@ -164,6 +167,7 @@ const ItemPage = () => {
           />
         </div>
         <input
+          id="submit"
           type="submit"
           className="button"
           value={id ? 'Modifier' : 'Créer'}
