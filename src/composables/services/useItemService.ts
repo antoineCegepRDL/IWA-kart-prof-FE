@@ -86,6 +86,9 @@ const useItemService = () => {
 
   const populateItem = async (item: DetailedItem): Promise<DetailedItem> => {
     item.brand = await getBrand(item.brandId);
+    item.price = +item.price;
+    item.discountPercentage = +item.discountPercentage;
+    item.quantity = +item.quantity;
     item.categories = await Promise.all(item.categoriesId.map(async (id) => getCategory(id)));
     return item;
   };
