@@ -1,11 +1,11 @@
-import '#styles/home.scss';
+import '#styles/user/categoryPage.scss';
 import { useEffect, useState } from 'react';
 import DetailedItem from '#types/DetailedItem';
 import AItemList from '#components/User/AItemList';
 import useItemService from '#composables/services/useItemService';
 import useCategoryService from '#composables/services/useCategoryService';
 import { useParams } from 'react-router-dom';
-import DetailedCategory from '../../types/DetailedCategory';
+import DetailedCategory from '#types/DetailedCategory';
 
 const TheCategoryPage = () => {
   const [items, setItems] = useState<DetailedItem[]>([]);
@@ -16,30 +16,27 @@ const TheCategoryPage = () => {
 
   const { id } = useParams();
   useEffect(() => {
-    const fetchItems = async () => {
+    const fetchItemsAndCategory = async () => {
       if (id) {
         setItems(await getItemsByCategoryId(id));
-      }
-    };
-    const fetchCategory = async () => {
-      if (id) {
         setCategory(await getCategory(id));
       }
     };
-    fetchItems();
-    fetchCategory();
+    fetchItemsAndCategory();
   }, [id]);
 
   return (
-    <>
-      <div className="wrapper">
-        <h1>Tous nos items de la catégorie : {category?.name}</h1>
+    <div>
+      <h1>Tous nos items de la catégorie : </h1>
+      {items.length === 0 ? (
+        <p>Aucun item encore pour cette catégorie</p>
+      ) : (
         <AItemList
           items={items}
           title={category?.name ?? ''}
-        ></AItemList>
-      </div>
-    </>
+        />
+      )}
+    </div>
   );
 };
 

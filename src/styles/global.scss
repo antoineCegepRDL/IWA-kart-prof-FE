@@ -1,77 +1,52 @@
 /*Pour utiliser l'extension scss, j'ai installé sass avec la commande : npm i sass*/
 
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
 html,
 body {
   font-family: Inter;
   background-color: #f0f0f0;
-  margin: 0;
-  padding: 0;
+
 }
 
-.chat-container {
+.wrapper {
   display: flex;
-  flex-direction: column-reverse; /* Reverse the order */
-  max-height: 800px; /* Optional: Set a maximum height for scrollable content */
-  overflow-y: auto; /* Optional: Add vertical scrolling */
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
 }
 
-.item {
-
-  img {
-    max-width: 90%;
-    max-width: 90%;
-  }
-
-  .item-name {
-    margin: 0;
-    color: #000;
-    font-family: DM Serif Display;
-    font-size: 48px;
-    font-style: italic;
-    font-weight: 400;
-  }
-
-  .brand-name {
-    margin: 0;
-    color: #000;
-    font-family: DM Sans;
-    font-size: 36px;
-    font-weight: 700;
-  }
+.content {
+  @apply m-10 px-10 py-5;
+  min-height: 100%;
+  flex-grow: 1;
+  width: 1920px;
+  margin: auto;
 }
 
-.price {
+main {
+  flex-grow: 1;
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
-  p {
-    text-align: center;
-    font-family: DM Sans;
-    font-size: 16px;
-    font-weight: 400;
-    border-radius: 5px;
-    background: #FFF;
-    display: flex;
-    width: 76px;
-    height: 33px;
-    flex-direction: column;
-    justify-content: center;
-    border: 1px solid #000;
-    margin-right: 20px;
-  }
-
-  .old-price {
-    color: rgba(0, 0, 0, 0.25);
-    text-decoration-line: line-through;
-  }
-
-  .regular-price {
-    color: #000;
+@for $i from 1 through 5 {
+  h#{$i} {
+    // Use a map to define font sizes for a more concise and maintainable approach
+    $sizes: (
+      1: text-5xl,
+      2: text-4xl,
+      3: text-3xl,
+      4: text-2xl,
+      5: text-xl
+    );
+      
+    // Apply the corresponding Tailwind text size class
+    @apply #{map-get($sizes, $i)};
+    @apply font-bold;
+    font-family: 'DM Sans', sans-serif;
   }
 }
 

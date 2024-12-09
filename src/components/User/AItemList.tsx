@@ -1,6 +1,6 @@
-import { useNavigate } from 'react-router-dom';
 import DetailedItem from '#types/DetailedItem';
 import AItem from '#components/User/AItem';
+import '#styles/user/itemList.scss';
 
 interface Props {
   items: DetailedItem[];
@@ -8,22 +8,15 @@ interface Props {
 }
 
 const AItemList = ({ items, title }: Props) => {
-  const navigate = useNavigate();
   return (
-    <div className="items">
-      <h2 className="section-title">{title}</h2>
-      <div className="list">
+    <div>
+      <h2>{title}</h2>
+      <div className="item-list">
         {items.map((item) => (
-          <div
+          <AItem
+            item={item}
             key={item.id}
-            className="item"
-            onClick={() => navigate(`/item/${item.id}`)}
-          >
-            <AItem
-              item={item}
-              key={item.id}
-            ></AItem>
-          </div>
+          ></AItem>
         ))}
       </div>
     </div>

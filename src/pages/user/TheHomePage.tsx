@@ -1,12 +1,13 @@
 import '#styles/home.scss';
 import MainImage from '#assets/mainImage.png';
 import { useEffect, useState } from 'react';
-import ABrandComponent from '#components/User/ABrand';
+import ABrandComponent from '#components/User/TheBrands';
 import DetailedItem from '#types/DetailedItem';
 import DetailedBrand from '#types/DetailedBrand';
 import AItemList from '#components/User/AItemList';
 import useItemService from '#composables/services/useItemService';
 import useBrandService from '../../composables/services/useBrandService';
+import TheBrands from '#components/User/TheBrands';
 
 const TheHomePage = () => {
   const [itemsInDiscount, setItemsInDiscount] = useState<DetailedItem[]>([]);
@@ -52,17 +53,7 @@ const TheHomePage = () => {
         title="Nos nouveautés"
       ></AItemList>
 
-      <div className="brands">
-        <h2 className="section-title">Nos marques</h2>
-        <div className="list">
-          {brands.map((brand) => (
-            <ABrandComponent
-              brand={brand}
-              key={brand.id}
-            ></ABrandComponent>
-          ))}
-        </div>
-      </div>
+      <TheBrands brands={brands} />
     </>
   );
 };

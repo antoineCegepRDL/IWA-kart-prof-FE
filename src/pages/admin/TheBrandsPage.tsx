@@ -14,7 +14,7 @@ const BrandsPage = () => {
       setBrands(await getBrands());
     };
     fetchBrands();
-  });
+  }, []);
 
   const handleDeleteItem = async (id: string) => {
     await deleteBrand(id);

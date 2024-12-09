@@ -16,7 +16,7 @@ import TheAdminBrandsPage from '#pages/admin/TheBrandsPage';
 
 export default function App() {
   return (
-    <div className="flex-between flex-column fill-height">
+    <div className="wrapper">
       <BrowserRouter>
         <Routes>
           <Route

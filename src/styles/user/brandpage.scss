@@ -1,0 +1,7 @@
+.header {
+  @apply flex justify-between items-center;
+
+  img {
+    @apply rounded-full;
+  }
+}

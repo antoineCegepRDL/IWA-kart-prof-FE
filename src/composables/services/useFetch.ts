@@ -78,11 +78,13 @@ const useFetch = () => {
   async function handleResponse<T>(response: Response): Promise<T | undefined> {
     if (!response.ok) {
       if (response.status === 500) {
-        throw new Error('Internal server error');
+        throw new Error('Le serveur est cassé, demande à ton prof de le réparer');
       } else if (response.status === 404) {
         return undefined as T;
       } else if (response.status === 400) {
-        throw new Error('Hmmmm, ton payload n<est pas bon');
+        throw new Error(
+          "Hmmmm, le serveur dit qu'il y a une erreur dans le formulaire.... va voir dans l'onglet network pour plus d'infos"
+        );
       } else {
         throw new Error(`Error: ${response.status} - ${response.statusText}`);
       }

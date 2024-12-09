@@ -1,4 +1,5 @@
 import Item from '#types/Item';
+import '#styles/user/Price.scss';
 
 interface Props {
   item: Item;

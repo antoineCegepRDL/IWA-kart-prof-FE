@@ -14,7 +14,7 @@ const CategoriesPage = () => {
       setCategories(await getCategories());
     };
     fetchCategories();
-  });
+  }, []);
 
   const handleDeleteItem = async (id: string) => {
     await deleteCategory(id);

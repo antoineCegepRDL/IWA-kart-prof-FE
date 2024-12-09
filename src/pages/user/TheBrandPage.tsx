@@ -1,11 +1,11 @@
-import '#styles/home.scss';
+import '#styles/user/brandPage.scss';
 import { useEffect, useState } from 'react';
 import DetailedItem from '#types/DetailedItem';
 import AItemList from '#components/User/AItemList';
 import useItemService from '#composables/services/useItemService';
 import useBrandService from '#composables/services/useBrandService';
 import { useParams } from 'react-router-dom';
-import DetailedBrand from '../../types/DetailedBrand';
+import DetailedBrand from '#types/DetailedBrand';
 
 const TheBrandPage = () => {
   const [items, setItems] = useState<DetailedItem[]>([]);
@@ -16,30 +16,34 @@ const TheBrandPage = () => {
 
   const { id } = useParams();
   useEffect(() => {
-    const fetchItems = async () => {
+    const fetchItemsAndBrand = async () => {
       if (id) {
         setItems(await getItemsByBrandId(id));
-      }
-    };
-    const fetchBrand = async () => {
-      if (id) {
         setBrand(await getBrand(id));
       }
     };
-    fetchItems();
-    fetchBrand();
+    fetchItemsAndBrand();
   }, [id]);
 
   return (
-    <>
-      <div className="wrapper">
-        <h1>Tous nos items de la marque : {brand?.name}</h1>
+    <div>
+      <div className="header">
+        <h1>Tous nos items de la marque : </h1>
+        <img
+          className="w-20 h-20"
+          src={brand?.logoUrl}
+          alt=""
+        />
+      </div>
+      {items.length === 0 ? (
+        <p>Aucun item encore pour cette marque</p>
+      ) : (
         <AItemList
           items={items}
           title={brand?.name ?? ''}
-        ></AItemList>
-      </div>
-    </>
+        />
+      )}
+    </div>
   );
 };
 
