@@ -70,6 +70,12 @@ main {
   }
 }
 
+.info-title {
+  display: inline-block;
+  width: 80%;
+  font-weight: bold;
+}
+
 .error-message {
   color: #ff0000; /* Bright red color for error */
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle shadow for better readability */

@@ -1,21 +1,18 @@
-import '#styles/kart.scss';
-import { useEffect, useState } from 'react';
+import '#styles/user/kart.scss';
+import '#styles/user/itemList.scss';
+import { useState } from 'react';
 import TheKartItem from '#components/User/TheKartItem';
+import TheInvoice from '#components/User/TheInvoice';
 import KartItem from '#types/KartItem';
 import useKartStorage from '#composables/useKartStorage';
 import useItemService from '#composables/services/useItemService';
 import OrderItem from '#types/OrderItem';
 
 const TheKartPage = () => {
-  const [items, setItems] = useState<KartItem[]>([]);
-
   const { clearStorage, getItemsFromStorage, removeItemFromStorage, updateItemFromStorage } = useKartStorage();
   const { orderItems } = useItemService();
-  const total = items.reduce((acc, x) => acc + x.quantityToBuy * ((1 - x.discountPercentage) * x.price), 0);
 
-  useEffect(() => {
-    setItems(getItemsFromStorage());
-  }, []);
+  const [items, setItems] = useState<KartItem[]>(getItemsFromStorage());
 
   const handleChangeQuatity = (item: KartItem) => {
     updateItemFromStorage(item);
@@ -23,9 +20,13 @@ const TheKartPage = () => {
   };
 
   const handleSubmit = async () => {
-    orderItems(items.map<OrderItem>((x) => ({ quantity: x.quantityToBuy, id: x.id })));
-    clearStorage();
-    setItems([]);
+    try {
+      orderItems(items.map<OrderItem>((x) => ({ quantity: x.quantityToBuy, id: x.id })));
+      clearStorage();
+      setItems([]);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const handleRemoveItem = async (id: string) => {
@@ -34,45 +35,28 @@ const TheKartPage = () => {
   };
 
   return (
-    <>
-      <div className="wrapper">
-        <div className="items">
-          <h2 className="section-title">Mon panier</h2>
-          <div className="list">
-            {items.map((item) => (
-              <div
-                className="item-kart"
-                key={item.id}
-              >
-                <TheKartItem
-                  item={item}
-                  onChangeQuatity={handleChangeQuatity}
-                  onRemoveItem={handleRemoveItem}
-                ></TheKartItem>
-              </div>
-            ))}
-          </div>
-        </div>
-        {items.length === 0 ? (
-          <div>Le panier est vide!</div>
-        ) : (
-          <div>
-            <div className="total">
-              <p className="price">Total : {total.toFixed(2)}$</p>
-              <p className="price">TPS : {(total * 0.05).toFixed(2)}$</p>
-              <p className="price">TVP : {(total * 0.1).toFixed(2)}$</p>
-              <p className="price total">Total : {(total * 1.15).toFixed(2)}$</p>
-            </div>
-            <div
-              className="button center"
-              onClick={handleSubmit}
-            >
-              <p>Passer la commande</p>
-            </div>
-          </div>
-        )}
+    <div className="content kart">
+      <h2>Mon panier</h2>
+      <div className="item-list">
+        {items.map((item) => (
+          <TheKartItem
+            key={item.id}
+            item={item}
+            onChangeQuatity={handleChangeQuatity}
+            onRemoveItem={handleRemoveItem}
+          />
+        ))}
       </div>
-    </>
+      <div className="w-1/2 m-auto text-lg">
+        {items.length === 0 ? <div>Le panier est vide!</div> : <TheInvoice items={items} />}
+      </div>
+      <div
+        className="button mx-auto my-4"
+        onClick={handleSubmit}
+      >
+        <p>Passer la commande</p>
+      </div>
+    </div>
   );
 };
 

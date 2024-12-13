@@ -1,0 +1,31 @@
+.kart-buttons {
+  @apply my-2;
+  display: flex;
+  justify-content: space-between;
+  min-width: 50px;
+
+  .kart-button {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    justify-content: center;
+  }
+  .quantity-to-buy {
+    font-size: 25px;
+    font-family: DM Sans;
+    border: black 1px solid;
+    border-radius: 15px;
+    height: 50px;
+    min-width: 50px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+  }
+}
+
+.kart {
+  .item {
+    width: 100%;
+  }
+}

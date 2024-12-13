@@ -1,15 +1,14 @@
-header {
+.header {
   height: 76.001px;
   flex-shrink: 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  @apply border-b-black border-solid border-b-2;
 
   nav {
-    display: flex;
-    flex-grow: 7;
-    overflow-x: scroll;
+    @apply flex justify-around w-full;
   }
 
   #logo {
@@ -45,6 +44,9 @@ header {
 
   .side {
     border-left: #000 solid 1px;
+    width: 20%;
+    height: 100%;
+    @apply flex justify-center items-center;
   }
 }
 

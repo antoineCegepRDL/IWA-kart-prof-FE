@@ -1,7 +1,7 @@
+import '#styles/user/item.scss';
 import DetailedItem from '#types/DetailedItem';
 import ADiscountPrice from '#components/User/ADiscountPrice';
 import ARegularPrice from '#components/User/ARegularPrice';
-import '#styles/user/item.scss';
 import { Link } from 'react-router-dom';
 
 interface Props {
