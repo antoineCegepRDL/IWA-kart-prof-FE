@@ -1,7 +1,6 @@
 import '#styles/home.scss';
 import MainImage from '#assets/mainImage.png';
 import { useEffect, useState } from 'react';
-import ABrandComponent from '#components/User/TheBrands';
 import DetailedItem from '#types/DetailedItem';
 import DetailedBrand from '#types/DetailedBrand';
 import AItemList from '#components/User/AItemList';
@@ -19,10 +18,10 @@ const TheHomePage = () => {
 
   useEffect(() => {
     const fetchItems = async () => {
-      setItems(await getItems());
+      setItems(await getItems('limit=4'));
     };
     const fetchItemsInDiscount = async () => {
-      const itemsInDiscoutFromServer = await getItems('itemsOnDiscount=true');
+      const itemsInDiscoutFromServer = await getItems('itemsOnDiscount=true&limit=2');
       setItemsInDiscount(itemsInDiscoutFromServer);
     };
     const fetchBrands = async () => {
@@ -35,13 +34,13 @@ const TheHomePage = () => {
   }, []);
 
   return (
-    <>
-      <div className="homeImage">
+    <div>
+      <div className="main-image">
         <img
           src={MainImage}
           alt=""
         />
-        <p className="welcomeMessage">50% de rabais sur + de 500 produits</p>
+        <h1>50% de rabais sur + de 500 produits</h1>
       </div>
       <AItemList
         items={itemsInDiscount}
@@ -54,7 +53,7 @@ const TheHomePage = () => {
       ></AItemList>
 
       <TheBrands brands={brands} />
-    </>
+    </div>
   );
 };
 

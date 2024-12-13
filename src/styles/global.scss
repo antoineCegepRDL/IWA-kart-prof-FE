@@ -18,10 +18,9 @@ body {
 }
 
 .content {
-  @apply m-10 px-10 py-5;
   min-height: 100%;
   flex-grow: 1;
-  width: 1920px;
+  max-width: 1920px;
   margin: auto;
 }
 

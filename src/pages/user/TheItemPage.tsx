@@ -40,7 +40,7 @@ const TheItemPage = () => {
   };
 
   return (
-    <>
+    <div>
       <div className="item-details">
         <div className="item">
           {item ? <AItem item={item}></AItem> : <></>}
@@ -63,7 +63,7 @@ const TheItemPage = () => {
         items={itemsInDiscount}
         title={'En rabais'}
       ></AItemList>
-    </>
+    </div>
   );
 };
 
