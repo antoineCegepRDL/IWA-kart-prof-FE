@@ -1,12 +1,11 @@
 .item {
-  width: 23%;
-  margin: 1%;
+  width: 20%;
 
   .item-container {
     @apply flex flex-col items-center;
     
     img {
-      height: 425px;
+      height: 250px;
       object-fit: cover;
     }
 

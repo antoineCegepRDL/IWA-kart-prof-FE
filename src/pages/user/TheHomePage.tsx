@@ -1,5 +1,4 @@
 import '#styles/home.scss';
-import MainImage from '#assets/mainImage.png';
 import { useEffect, useState } from 'react';
 import DetailedItem from '#types/DetailedItem';
 import DetailedBrand from '#types/DetailedBrand';
@@ -36,23 +35,27 @@ const TheHomePage = () => {
   return (
     <div>
       <div className="main-image">
-        <img
-          src={MainImage}
-          alt=""
-        />
-        <h1>50% de rabais sur + de 500 produits</h1>
+        <div className="content">
+          <h1>50% de rabais sur + de 500 produits</h1>
+        </div>
       </div>
-      <AItemList
-        items={itemsInDiscount}
-        title="En rabais"
-      ></AItemList>
+      <div className="content">
+        <div className="section">
+          <AItemList
+            items={itemsInDiscount}
+            title="En rabais"
+          />
+        </div>
 
-      <AItemList
-        items={items}
-        title="Nos nouveautés"
-      ></AItemList>
+        <div className="section">
+          <AItemList
+            items={items}
+            title="Nos nouveautés"
+          />
+        </div>
 
-      <TheBrands brands={brands} />
+        <TheBrands brands={brands} />
+      </div>
     </div>
   );
 };

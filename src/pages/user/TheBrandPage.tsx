@@ -26,7 +26,7 @@ const TheBrandPage = () => {
   }, [id]);
 
   return (
-    <div>
+    <div className="content">
       <div className="header">
         <h1>Tous nos items de la marque : </h1>
         <img

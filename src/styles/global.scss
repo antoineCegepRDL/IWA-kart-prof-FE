@@ -7,7 +7,6 @@ html,
 body {
   font-family: Inter;
   background-color: #f0f0f0;
-
 }
 
 .wrapper {
@@ -20,8 +19,10 @@ body {
 .content {
   min-height: 100%;
   flex-grow: 1;
-  max-width: 1920px;
+  max-width: 1200px;
+  padding: 0 20px;
   margin: auto;
+  @apply align-middle;
 }
 
 main {
@@ -72,4 +73,24 @@ main {
 .error-message {
   color: #ff0000; /* Bright red color for error */
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle shadow for better readability */
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #008ED6;
+  border-radius: 10px;
+  border: 3px solid #f0f0f0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #005f99;
 }

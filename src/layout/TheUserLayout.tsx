@@ -56,7 +56,7 @@ const UserLayout = () => {
         </div>
       </header>
       <main>
-        <div className="content">
+        <div>
           <Outlet />
         </div>
       </main>

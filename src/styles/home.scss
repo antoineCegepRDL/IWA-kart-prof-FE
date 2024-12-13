@@ -1,61 +1,23 @@
-  .main-image {
-    position: relative;
-    width: calc(100vw - 80px);
-    @media (min-width: 1920px) {
-    }
-    
-    img {
-      width: 100%;
-    }
-    
-    top:100px;
-    h1 {
-      @apply text-8xl text-white;
-      @apply left-14 top-0 absolute;
-      line-height: 100%;
-    }
+.main-image {
+  @apply w-full;
+  background-image: url('../assets/mainImage.png');
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  min-height: 500px;
+  
+  h1 {
+    @apply text-8xl text-white;
+    @apply left-14 top-0;
+    max-width: 800px;
   }
+}
 
-  .items {
+.section {
+  margin-top: 60px;
+  
+}
 
-    .discount-item-home {
-      margin: 10px;
-      width: 500x;
-      height: 500px;
-    }
-
-    .new-item-home {
-      margin: 10px;
-      width: 400x;
-      height: 400px;
-    }
-
-    .item {
-      cursor: pointer;
-      display: block;
-      img {
-        max-width: 90%;
-        max-width: 90%;
-      }
-
-      .item-name {
-        margin: 0;
-        color: #000;
-        font-family: DM Serif Display;
-        font-size: 48px;
-        font-style: italic;
-        font-weight: 400;
-      }
-
-      .brand-name {
-        margin: 0;
-        color: #000;
-        font-family: DM Sans;
-        font-size: 36px;
-        font-weight: 700;
-      }
-    }
-  }
 
 .section-title {
   font-size: 64px;

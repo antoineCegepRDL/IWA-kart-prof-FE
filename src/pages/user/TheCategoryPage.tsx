@@ -26,7 +26,7 @@ const TheCategoryPage = () => {
   }, [id]);
 
   return (
-    <div>
+    <div className="content">
       <h1>Tous nos items de la catégorie : </h1>
       {items.length === 0 ? (
         <p>Aucun item encore pour cette catégorie</p>

@@ -1,7 +1,6 @@
-import '#styles/item.scss';
 import { useParams } from 'react-router-dom';
-import DetailedItem from '#types/DetailedItem';
 import { useEffect, useState } from 'react';
+import DetailedItem from '#types/DetailedItem';
 import AItem from '#components/User/AItem';
 import useKartStorage from '#composables/useKartStorage';
 import AItemList from '#components/User/AItemList';
@@ -40,29 +39,45 @@ const TheItemPage = () => {
   };
 
   return (
-    <div>
+    <div className="content">
       <div className="item-details">
-        <div className="item">
-          {item ? <AItem item={item}></AItem> : <></>}
-          <p>{item?.description}</p>
-          <div
-            className="button"
-            onClick={onAddToKartClick}
-          >
-            <p>Ajouter au panier</p>
+        {item && (
+          <div className="m-auto w-50 flex-1">
+            <div className="flex gap-4">
+              <AItem item={item} />
+              <div></div>
+              <div className="flex-grow text-center">
+                <h3>Des infos utiles</h3>
+                <p>{item?.description}</p>
+              </div>
+              <div>
+                <h3>Tu en as envie?</h3>
+                <div
+                  className="button"
+                  onClick={onAddToKartClick}
+                >
+                  <p>Ajouter au panier</p>
+                </div>
+                <h3>Information importante!</h3>
+                <p>Il n'en reste que {item.quantity} en inventaire. Fait vite!</p>
+              </div>
+            </div>
           </div>
-        </div>
+        )}
+      </div>
+      <div className="section">
+        <AItemList
+          items={items}
+          title="Vous pourriez aimer..."
+        />
       </div>
 
-      <AItemList
-        items={items}
-        title="Vous pourriez aimer..."
-      ></AItemList>
-
-      <AItemList
-        items={itemsInDiscount}
-        title={'En rabais'}
-      ></AItemList>
+      <div className="section mb-10">
+        <AItemList
+          items={itemsInDiscount}
+          title={'En rabais'}
+        />
+      </div>
     </div>
   );
 };
