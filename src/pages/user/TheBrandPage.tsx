@@ -1,4 +1,3 @@
-import '#styles/user/brandPage.scss';
 import { useEffect, useState } from 'react';
 import DetailedItem from '#types/DetailedItem';
 import AItemList from '#components/User/AItemList';
