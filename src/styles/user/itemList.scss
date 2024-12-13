@@ -1,0 +1,8 @@
+.item-list {
+  @apply flex justify-start items-center flex-wrap;
+  width: 100%;
+  gap:50px;
+  .item {
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,23 @@
+.item {
+  width: 20%;
+
+  .item-container {
+    @apply flex flex-col items-center;
+    
+    img {
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .border-top {
+      @apply border-t-2 border-black mt-5;
+    }
+
+    .item-description {
+      width: 100%;
+      h3 {
+        @apply italic capitalize text-2xl;
+      }
+    }
+  }
+}

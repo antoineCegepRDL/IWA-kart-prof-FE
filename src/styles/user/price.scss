@@ -1,0 +1,53 @@
+.price {
+  display: flex;
+
+  p {
+    text-align: center;
+    font-family: DM Sans;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 5px;
+    background: #FFF;
+    display: flex;
+    width: 76px;
+    height: 33px;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid #000;
+    margin-right: 20px;
+  }
+
+  .old-price {
+    color: rgba(0, 0, 0, 0.25);
+    text-decoration-line: line-through;
+  }
+
+  .regular-price {
+    color: #000;
+  }
+}
+
+.button {
+  background-color: #008ED6;
+  color: white;
+  font-size: 30px;
+  font-family: comic;
+  border: black 1px solid;
+  border-radius: 15px;
+  height: 100px;
+  width: 260px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  p {
+    width: 100%;
+  }
+}
+
+.error-message {
+  color: #ff0000; /* Bright red color for error */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle shadow for better readability */
+}

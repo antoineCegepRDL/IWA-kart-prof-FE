@@ -14,7 +14,8 @@ const ItemsPage = () => {
       setItems(await getItems());
     };
     fetchItems();
-  });
+  }, []);
+
   const handleDelete = async (id: string) => {
     await deleteItem(id);
     setItems([...items.filter((x) => x.id !== id)]);

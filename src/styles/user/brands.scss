@@ -1,0 +1,12 @@
+.brands {
+  @apply my-10;
+  .list {
+    @apply mt-5;
+    @apply flex justify-around items-center;
+  }
+  img {
+      @apply rounded-full;
+      width: 100px;
+      height: 100px;
+    }
+}

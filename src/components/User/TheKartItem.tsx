@@ -1,7 +1,6 @@
-import '#styles/kart.scss';
 import KartItem from '#types/KartItem';
-import ADiscountPrice from '#components/User/ADiscountPrice';
-import ARegularPrice from '#components/User/ARegularPrice';
+import AInfoLine from '../AInfoLine';
+import AItem from './AItem';
 
 interface Props {
   item: KartItem;
@@ -27,24 +26,11 @@ const TheKartItem = ({ item, onChangeQuatity, onRemoveItem }: Props) => {
     }
   };
 
-  const total = item.quantityToBuy * (item.price * (1 - item.discountPercentage));
+  const subTotal = item.quantityToBuy * (1 - item.discountPercentage) * item.price;
 
   return (
-    <div className="item">
-      <div className="imageContainer">
-        <img
-          src={item.imageUrl}
-          alt=""
-        />
-      </div>
-      <hr />
-      <p className="item-name">{item.name}</p>
-      <p className="brand-name">{item.brand.name}</p>
-      {item.discountPercentage ? (
-        <ADiscountPrice item={item}></ADiscountPrice>
-      ) : (
-        <ARegularPrice item={item}></ARegularPrice>
-      )}
+    <div>
+      <AItem item={item} />
       <div className="kart-buttons">
         <span
           className="kart-button button"
@@ -66,9 +52,11 @@ const TheKartItem = ({ item, onChangeQuatity, onRemoveItem }: Props) => {
           X
         </span>
       </div>
-      <div className="totalAmount">
-        <p className="price">{total.toFixed(2)} $</p>
-      </div>
+      <AInfoLine
+        title="Sous-total"
+        value={subTotal.toFixed(2)}
+        suffix="$"
+      ></AInfoLine>
     </div>
   );
 };

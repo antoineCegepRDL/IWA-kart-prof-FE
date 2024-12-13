@@ -1,12 +1,11 @@
 import '#styles/home.scss';
-import MainImage from '#assets/mainImage.png';
 import { useEffect, useState } from 'react';
-import ABrandComponent from '#components/User/ABrand';
 import DetailedItem from '#types/DetailedItem';
 import DetailedBrand from '#types/DetailedBrand';
 import AItemList from '#components/User/AItemList';
 import useItemService from '#composables/services/useItemService';
 import useBrandService from '../../composables/services/useBrandService';
+import TheBrands from '#components/User/TheBrands';
 
 const TheHomePage = () => {
   const [itemsInDiscount, setItemsInDiscount] = useState<DetailedItem[]>([]);
@@ -18,10 +17,10 @@ const TheHomePage = () => {
 
   useEffect(() => {
     const fetchItems = async () => {
-      setItems(await getItems());
+      setItems(await getItems('limit=4'));
     };
     const fetchItemsInDiscount = async () => {
-      const itemsInDiscoutFromServer = await getItems('itemsOnDiscount=true');
+      const itemsInDiscoutFromServer = await getItems('itemsOnDiscount=true&limit=2');
       setItemsInDiscount(itemsInDiscoutFromServer);
     };
     const fetchBrands = async () => {
@@ -34,36 +33,30 @@ const TheHomePage = () => {
   }, []);
 
   return (
-    <>
-      <div className="homeImage">
-        <img
-          src={MainImage}
-          alt=""
-        />
-        <p className="welcomeMessage">50% de rabais sur + de 500 produits</p>
-      </div>
-      <AItemList
-        items={itemsInDiscount}
-        title="En rabais"
-      ></AItemList>
-
-      <AItemList
-        items={items}
-        title="Nos nouveautés"
-      ></AItemList>
-
-      <div className="brands">
-        <h2 className="section-title">Nos marques</h2>
-        <div className="list">
-          {brands.map((brand) => (
-            <ABrandComponent
-              brand={brand}
-              key={brand.id}
-            ></ABrandComponent>
-          ))}
+    <div>
+      <div className="main-image">
+        <div className="content">
+          <h1>50% de rabais sur + de 500 produits</h1>
         </div>
       </div>
-    </>
+      <div className="content">
+        <div className="section">
+          <AItemList
+            items={itemsInDiscount}
+            title="En rabais"
+          />
+        </div>
+
+        <div className="section">
+          <AItemList
+            items={items}
+            title="Nos nouveautés"
+          />
+        </div>
+
+        <TheBrands brands={brands} />
+      </div>
+    </div>
   );
 };
 
