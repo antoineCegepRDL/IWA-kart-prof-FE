@@ -38,13 +38,10 @@ test("Ajout d'un item en échec (validation des champs)", async ({ page }) => {
 test("Ajout d'un item", async ({ page }) => {
   await page.goto('http://localhost:5173/admin/items');
 
-  const numberOfCategories = await page.locator('tr').count();
+  const numberOfItems = await page.locator('tr').count();
   await page.locator('#new-item').click();
   await page.waitForURL('http://localhost:5173/admin/item');
   await expect(page).toHaveURL('http://localhost:5173/admin/item');
-  await page.locator('#submit').click();
-  console.log(page.locator('.error-message'));
-  expect(await page.locator('.error-message').count()).toBe(7);
 
   await page.locator('input[name="name"]').fill('test');
   await page.locator('textarea[name="description"]').fill('test');
@@ -59,7 +56,7 @@ test("Ajout d'un item", async ({ page }) => {
 
   await page.locator('#submit').click();
   await expect(page).toHaveURL('http://localhost:5173/admin/items');
-  expect((await page.locator('tr').count()) === numberOfCategories + 1, "Le nombre de marques n'a pas augmenté");
+  expect((await page.locator('tr').count()) === numberOfItems + 1, "Le nombre de produits n'a pas augmenté");
 });
 
 test("Modification d'un item", async ({ page }) => {
@@ -84,12 +81,10 @@ test("Modification d'un item", async ({ page }) => {
 test("Suppression d'un item", async ({ page }) => {
   await page.goto('http://localhost:5173/admin/items');
   const numberOfItems = await page.locator('tr').count();
-  console.log('🚀 ~ test ~ numberOfCategories:', numberOfItems);
   const rowWithRandomName = page.locator('tr', { hasText: tonPrenom });
   await rowWithRandomName.locator('.supprimer').first().click();
 
   // Permet d'attendre que la page charge complètement avant de changer la valeur du champ
   await page.waitForTimeout(400);
-  console.log("🚀 ~ test ~ (await page.locator('tr').count():", await page.locator('tr').count());
   expect((await page.locator('tr').count()) === numberOfItems - 1, "L item n'a pas été supprimée");
 });

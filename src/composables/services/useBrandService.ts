@@ -10,7 +10,7 @@ const useBrandService = () => {
     if (newBrand) {
       return newBrand;
     } else {
-      throw new Error('Impossible de créer la tâche');
+      throw new Error('Impossible de créer la marque');
     }
   };
 
@@ -25,7 +25,7 @@ const useBrandService = () => {
       }
       return brand;
     } else {
-      throw new Error('Impossible de créer la tâche');
+      throw new Error("Impossible d'aller chercher la marque");
     }
   };
 
